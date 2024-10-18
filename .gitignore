@@ -9,7 +9,7 @@
 *.ipynb
 *.out
 *.toc
-*.pdf
+# *.pdf
 *.bbl
 *.blg
 
