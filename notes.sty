@@ -1,0 +1,123 @@
+\ProvidesPackage{notes}
+
+%% Package options
+\usepackage{amsmath,amssymb}
+\usepackage{xpatch}
+\usepackage{iftex}
+\usepackage[minimal]{yhmath}
+\usepackage{derivative}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[svgnames,dvipsnames,table]{xcolor}
+\usepackage{caption} % show caption on top of the table
+\DeclareCaptionFormat{myformat}{#3}
+\captionsetup[algorithm]{format=myformat}
+
+
+\usepackage[colorlinks=true, pdfusetitle, urlcolor=RoyalBlue, linkcolor=RoyalBlue, citecolor=RoyalBlue]{hyperref}
+\usepackage[capitalise, nameinlink]{cleveref}
+
+%Preferred enumeration
+\usepackage{enumitem}
+\setlist[enumerate]{listparindent=\parindent, label=(\roman*), }
+
+
+%%additional writings style
+% FIXME: fix theorem styles
+\declaretheoremstyle[
+  spaceabove=12pt,
+  spacebelow=12pt,
+  bodyfont=\itshape,
+]{base}
+\declaretheoremstyle[
+  headfont=\color{blue!40!black}\normalfont\bfseries,
+  spaceabove=12pt,
+  spacebelow=12pt,
+  bodyfont=\normalfont
+]{basehead}
+
+%%theorem environments
+\declaretheorem[style=base,name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[style=base,name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[style=base,name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[style=base,name=Corollary,sibling=theorem]{corollary}
+\declaretheorem[style=base,name=Assumption,sibling=theorem]{assume}
+\declaretheorem[style=base,name=Theorem,numbered=no]{theorem*}
+\declaretheorem[style=base,name=Lemma,numbered=no]{lemma*}
+\declaretheorem[style=base,name=Proposition,numbered=no]{proposition*}
+\declaretheorem[style=base,name=Corollary,numbered=no]{corollary*}
+\declaretheorem[style=base,name=Assumption,numbered=no]{assume*}
+\declaretheorem[style=base,name=Algorithm,sibling=theorem]{algorithm}
+\declaretheorem[style=base,name=Algorithm,numbered=no]{algorithm*}
+\declaretheorem[style=base,name=Claim,sibling=theorem]{claim}
+\declaretheorem[style=base,name=Claim,numbered=no]{claim*}
+\declaretheorem[style=base,name=Example,sibling=theorem]{example}
+\declaretheorem[style=base,name=Example,numbered=no]{example*}
+\declaretheorem[style=base,name=Remark,sibling=theorem]{remark}
+\declaretheorem[style=base,name=Remark,numbered=no]{remark*}
+\declaretheorem[style=base,name=Principle,sibling=theorem]{principle}
+\declaretheorem[style=base,name=Principle,numbered=no]{principle*}
+
+
+%%additional writings
+\declaretheorem[style=basehead,name=Answer,sibling=theorem]{answer}
+\declaretheorem[style=basehead,name=Answer,numbered=no]{answer*}
+\declaretheorem[style=base,name=Conjecture,sibling=theorem]{conjecture}
+\declaretheorem[style=base,name=Conjecture,numbered=no]{conjecture*}
+\declaretheorem[style=base,name=Definition,sibling=theorem]{definition}
+\declaretheorem[style=base,name=Definition,numbered=no]{definition*}
+\declaretheorem[style=base,name=Observation,sibling=theorem]{observation}
+\declaretheorem[style=base,name=Observation,numbered=no]{observation*}
+\declaretheorem[style=basehead,name=Exercise,sibling=theorem]{exercise}
+\declaretheorem[style=basehead,name=Exercise,numbered=no]{exercise*}
+\declaretheorem[style=basehead,name=Fact,sibling=theorem]{fact}
+\declaretheorem[style=basehead,name=Fact,numbered=no]{fact*}
+\declaretheorem[style=basehead,name=Problem,sibling=theorem]{problem}
+\declaretheorem[style=basehead,name=Problem,numbered=no]{problem*}
+\declaretheorem[style=basehead,name=Question,sibling=theorem]{ques}
+\declaretheorem[style=basehead,name=Question,numbered=no]{ques*}
+
+%%refs
+\Crefname{answer}{Answer}{Answers}
+\Crefname{assume}{Assumption}{Assumptions}
+\Crefname{claim}{Claim}{Claims}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{exercise}{Exercise}{Exercises}
+\Crefname{fact}{Fact}{Facts}
+\Crefname{problem}{Problem}{Problems}
+\Crefname{ques}{Question}{Questions}
+\Crefname{answer}{Answer}{Answers}
+\Crefname{principle}{Principle}{Principles}
+%%Compatibility with algorithm2e
+\Crefname{algocf}{Algorithm}{Algorithms}
+
+
+%%Special symbols
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+
+\DeclareMathSymbol{\intop}  {\mathop}{mathx}{"B3}
+\DeclareMathSymbol{\iintop} {\mathop}{mathx}{"B4}
+\DeclareMathSymbol{\iiintop}{\mathop}{mathx}{"B5}
+\DeclareMathSymbol{\ointop} {\mathop}{mathx}{"B6}
+\DeclareMathSymbol{\oiintop}{\mathop}{mathx}{"B7}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

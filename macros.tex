@@ -1,0 +1,157 @@
+%$Additional packages
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage{nicefrac}
+\renewcommand{\emptyset}{\varnothing}
+
+%%Cal letters
+\newcommand{\CG}{\mathcal{G}}
+\newcommand{\CU}{\mathcal{U}}
+\newcommand{\CX}{\mathcal{X}}
+\newcommand{\CY}{\mathcal{Y}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\CD}{\mathcal{D}}
+\newcommand{\CH}{\mathcal{H}}
+\newcommand{\CI}{\mathcal{I}}
+\newcommand{\CL}{\mathcal{L}}
+\newcommand{\CM}{\mathcal{M}}
+\newcommand{\CP}{\mathcal{P}}
+\newcommand{\CR}{\mathcal{R}}
+\newcommand{\CS}{\mathcal{S}}
+\newcommand{\CZ}{\mathcal{Z}}
+\newcommand{\CT}{\mathcal{T}}
+\newcommand{\CB}{\mathcal{B}}
+\newcommand{\CA}{\mathcal{A}}
+\newcommand{\CW}{\mathcal{W}}
+\newcommand{\CF}{\mathcal{F}}
+\newcommand{\CO}{\mathcal{O}}
+\newcommand{\CQ}{\mathcal{Q}}
+\newcommand{\CN}{\mathcal{N}}
+\newcommand{\CE}{\mathcal{E}}
+
+%%Scr letters
+\newcommand{\SG}{\mathscr{G}}
+\newcommand{\SU}{\mathscr{U}}
+\newcommand{\SX}{\mathscr{X}}
+\newcommand{\SY}{\mathscr{Y}}
+\newcommand{\SC}{\mathscr{C}}
+\newcommand{\SD}{\mathscr{D}}
+\newcommand{\SH}{\mathscr{H}}
+\newcommand{\SI}{\mathscr{I}}
+\newcommand{\SL}{\mathscr{L}}
+\newcommand{\SM}{\mathscr{M}}
+\newcommand{\SP}{\mathscr{P}}
+\newcommand{\SR}{\mathscr{R}}
+\renewcommand{\SS}{\mathscr{S}}
+\newcommand{\SZ}{\mathscr{Z}}
+\newcommand{\ST}{\mathscr{T}}
+\newcommand{\SB}{\mathscr{B}}
+\newcommand{\SA}{\mathscr{A}}
+\newcommand{\SW}{\mathscr{W}}
+\newcommand{\SF}{\mathscr{F}}
+\newcommand{\SO}{\mathscr{O}}
+\newcommand{\SQ}{\mathscr{Q}}
+\newcommand{\SN}{\mathscr{N}}
+
+%%Category thoery
+\newcommand{\obj}{\on{obj}}
+\newcommand{\Set}{\on{Set}}
+\newcommand{\Top}{\on{Top}}
+\newcommand{\hTop}{\on{hTop}}
+\newcommand{\Grp}{\on{Grp}}
+\newcommand{\Ab}{\on{Ab}}
+\newcommand{\Rng}{\on{Rng}}
+\newcommand{\Hom}{\on{Hom}}
+\newcommand{\id}{\on{id}}
+
+%%Var
+\newcommand{\vp}{\varphi}
+\newcommand{\vr}{\varrho}
+
+%%Mathbb letters
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+
+%%Operators
+\newcommand{\on}[1]{\operatorname{#1}}
+\newcommand{\ons}[1]{\operatorname{\mathsf{#1}}}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+\newcommand{\intset}{\on{int}}
+\newcommand{\extset}{\on{ext}}
+
+%%Useful characters
+\newcommand{\eps}{\varepsilon}
+
+%%Vectors, random variables
+\renewcommand{\b}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\proj}{\on{Proj}}
+
+%%Probability
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\Pr}{\mathbf{P}}
+\newcommand{\ind}{\mathbbm{I}}
+
+%%Linear algebra
+\newcommand{\rank}{\on{rank}}
+\newcommand{\spanset}{\on{span}}
+\newcommand{\conv}{\on{conv}}
+
+%%Analysis
+\newcommand{\Rloc}{\CR_{\on{loc}}}
+ 
+% infinitesimal
+\renewcommand{\d}{\, \mathrm{d}}
+% upper/lower integrals
+\def\upint{\mathchoice
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%Maps
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\injto}{\hookrightarrow}
+% Map restriction
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+%%Learning theory
+\newcommand{\err}{\on{err}}
+
+%%Notetaking
+\newcommand{\vocab}[1]{\textbf{\color{blue}\sffamily #1}}
+\providecommand{\alert}{\vocab}
+\newcommand{\hrulebar}{
+  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\nointerlineskip \vspace{\baselineskip}
+}
+
+%%Useful notation
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\dperp}{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand{\unif}[1]{\textsf{Unif}(#1)}
+\newcommand{\sgn}{\on{sgn}}
+
+\newcommand{\norm}[1]{\left\| #1\right\|}
+
+
+\renewcommand{\b}[1]{\ensuremath{\mathbf{#1}}} % bold letters
+\newcommand{\bs}[1]{\ensuremath{\boldsymbol{#1}}} % bold symbols
+\newcommand{\bi}[1]{\ensuremath{\bm{#1}}} % bold symbols
+\renewcommand{\c}[1]{\ensuremath{\mathcal{#1}}} % caligraphic font
+\newcommand{\Ex}[1]{\ensuremath{\mathbb{E}[#1]}}  % expectation operator

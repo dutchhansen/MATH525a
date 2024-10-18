@@ -1,0 +1,18 @@
+# ignore all files except for .tex and .pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.aux
+*.log
+*.synctex.gz
+.DS_Store
+*.ipynb
+*.out
+*.toc
+*.pdf
+*.bbl
+*.blg
+
+# ignore all files in /pdfs and /homework
+pdfs/*
+homework/*
