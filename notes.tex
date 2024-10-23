@@ -1039,7 +1039,7 @@ It turns out that we can approximate measurable functions using simple functions
     \[\sum_{k=0}^{2^{2n} - 1} k2^{-n} \mu\Big( f^{-1}\Big((k2^{-n}, (k+1)2^{-n})\Big)\Big).\] This corresponds to a Riemann sum for the integral \[\int_0^{2^n} \mu(\{x : f(x) > t\}) \d t.\] In particular, \[\int f \d \mu = \int_0^\infty \mu(\{x : f(x) > t\}) \d t,\] as we will see.
 \end{remark} 
 
-\begin{proposition}
+\begin{proposition}\label{prop:equal-ae-iff-complete-measure}
     The following implications are valid if and only if $\mu$ is a complete measure. \begin{enumerate}
         \item If $f$ is measurable and $f = g$, $\mu$-a.e., then $g$ is measurable.
         \item If $f_n$ is measurable for $n \in \N$ and $f_n \to f$, $\mu$-a.e., then $f$ is measurable.
@@ -1144,7 +1144,7 @@ We now discuss several properties of these integrals.
     Let $f_1, f_2 \in L^+$. Then we can find $\phi_j^1$ and $\phi_j^2$ approximating $f_1$ and $f_2$, respectively. Next, \[\int f_1 + f_2 \underset{\text{MCT}}{=} \lim_j \int \phi_j^1 + \phi_j^2 = \lim_j \left( \int \phi_j^1 + \int \phi_j^2 \right) = \lim_j \int \phi_j^1 + \lim_j \int \phi_j^2 \underset{\text{MCT}}{=} \int f_1 + \int f_2.\] By induction, for any finite sum, $\int \sum f_n = \sum \int f_n$. Now, consider the partial sum $g_N = \sum_1^N f_n$ and apply MCT to this function. We obtain \[\int \sum_1^\infty f_n = \sum_1^\infty \int f_n.\]
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{prop:L-plus-zero-ae}
     If $f \in L^+$, then $\int f = 0$ if and only if $f = 0$ a.e.
 \end{proposition}
 
@@ -1227,7 +1227,7 @@ What happens when we drop the monotonicity assumption?
 \end{proof}
 
 \begin{proposition}
-    The space of complex-valued integrable functions is a complex vector space, and the integral is a complex linear funcitonal on this vector space.
+    The space of complex-valued integrable functions is a complex vector space, and the integral is a complex linear functional on this vector space.
 \end{proposition}
 
 \begin{proof}
@@ -1297,7 +1297,7 @@ We may now define $L^1$ properly.
 We can use this therem to prove a nice approximation result.
 
 \begin{theorem}
-    Let $f \in L^1(\mu)$ and $\eps > 0$. Then we can find a simple function $\phi$ such that $\|f - \phi\|_{L^1} < \eps$. It follows that simple functions are dense in $(L^1(\mu), \rho)$. Also, if $\mu$ is a Lebesgue-Stieltjes measure on $\R$, then the sets $E_j$ in the standard representation $\phi = \sum_1^N a_j \chi_{E_j}$ can be chosen as a finite union of open intervals. Moreover, there exists a continuous function $g$, vanishing outside a bounded interval, such that $\|f - g\|_{L^1} < \eps$.
+    Let $f \in L^1(\mu)$ and $\eps > 0$. Then we can find a simple function $\phi$ such that $\|f - \phi\|_{L^1} < \eps$. It follows that simple functions are dense in $(L^1(\mu), \rho)$. Also, if $\mu$ is a Lebesgue-Stieltjes measure on $\R$, then the sets $E_j$ in the representation $\phi = \sum_1^N a_j \chi_{E_j}$ can be chosen as a finite union of open intervals. Moreover, there exists a continuous function $g$, vanishing outside a bounded interval, such that $\|f - g\|_{L^1} < \eps$.
 \end{theorem}
 
 \begin{proof}
@@ -1311,6 +1311,41 @@ We can use this therem to prove a nice approximation result.
     \end{cases}\]
     More generally, we can approximate any simple function $\R \to \C$ by a continuous function arbitrarily close in $L^1$.
 \end{proof}
+
+\begin{theorem}
+    Suppose $f : X \times [a, b] \to \C$ for $-\infty < a < b < \infty$, and that $f(\cdot, t) : X \to \C$ is integrable for each $t \in [a, b]$. Let \[F(t) = \int_X f(x, t) \d \mu(x).\] \begin{enumerate}
+        \item Suppose $\exists g \in L^1(\mu)$ such that $|f(x, t)| \leq g(x)$ for all $x, t$. If $\lim_{t \to t_0} f(x, t) = f(x,t_0)$ for all $x$, then \[\lim_{t \to t_0} F(t) = F(t_0).\] In particular, if $f(x, \cdot) : [a, b] \to \C$ is continuous for all $x$, then $F$ is continuous.
+        \item Suppose there $\partial f / \partial t$ exists and $\exists g \in L^1$ such that $\left| \frac{\partial f}{\partial t}(x, t) \right| \leq g(x)$ for all $x, t$. Then $F$ is differentiable and \[F'(t) = \int \frac{\partial f}{\partial t}(x, t) \d \mu(x).\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    The first statment is almost trivial; we can apply DCT to any sequence of functions $\{f(\cdot, t_n)\}_n$ for $t_n \to t_0$. To see the second claim, write \[\frac{\partial f}{\partial t}(x, t_0) = \lim_{n \to \infty} h_n(x), \ \ \ \ \text{where} \ \ \ \ h_n(x) = \frac{f(x, t_n) - f(x, t_0)}{t_n - t_0}.\] Notice that as the limit of measurable functions, $\frac{\partial f}{\partial t}(x, t_0)$ is measurable. By the Mean Value Theorem, \[|h_n(x)| < \sup_{t \in [a,b]} \left|\frac{\partial f}{\partial t} (x, t) \right| \leq g(x).\] By DCT, \[F'(t_0) = \lim \frac{F(t_n) - F(t_0)}{t_n - t_0} = \lim \int h_n(x) \d \mu(x) = \int \frac{\partial f}{\partial t} (x, t_0) \d \mu(x).\]
+\end{proof}
+
+\subsubsection{Riemann Integration}
+
+In the special case where the measure $\mu$ is the Lebesgue measure on $\R$, the integral is called the Lebesgue integral. If a function is integrable with respect to the Lebesgue measure, we call it Lebesgue-integrable. We now return to the theory of the Riemann-Stieltjes integrals, and compare with measure-theoretic integration.
+
+\begin{definition}[Riemann integral]
+    A partition $P$ of $[a, b]$ is a finite sequence \[P = \{t_j\}_{j=0}^{n}, \ \ \text{such that} \ \ a =t_0 < \cdots < t_n = b.\] Associated with each partition, we define the upper and lower sums for a bounded real-valued function on $[a, b]$ as \begin{align*}
+        S_{P}f = \sum_j M_j(t_j - t_{j-1}), \ \ \ \ &\text{and} \ \ \ \ s_{P}f = \sum_j m_j (t_j - t_{j-1})\\
+        \text{where} \ \ \ \ M_j = \sup_{t \in [t_{j-1}, t_j]}f(t), \ \ \ \ &\text{and} \ \ \ \ m_j = \inf_{t \in [t_{j-1}, t_j]}f(t).
+    \end{align*} We define the upper integral $\ol{I}_a^b(f)$ and lower integral $\underline{I}_a^b(f)$ as \[\ol{I}_a^b(f) = \inf_{P} S_P (f), \ \ \ \ \underline{I}_a^b(f) = \sup_{\underline{P}}s_P(f).\] If $\ol{I}_a^b(f) = \underline{I}_a^b(f)$, we denote the value by $\int_a^b f(x) \d x$, and call it the Riemann integral over $[a, b]$.
+\end{definition}
+
+\begin{theorem}
+    Let $f$ be a bounded real-valued function on $[a, b]$. \begin{enumerate}
+        \item If $f$ is Riemann-integrable, then $f$ is Lebesgue-integrable and \[\int_a^b f(x) \d x = \int_{[a, b]} f \d m.\]
+        \item The function $f$ is Riemann-integrable if and only if the set \[\{x \in [a, b] : \text{$f$ is discontinuous at $x$}\}\] has measure zero.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We prove (a) and leave (b) to the homework. Consider the simple functions \[G_P = \sum_1^n M_j \chi_{(t_{j-1}, t_j]}, \ \ \ \ g_P = \sum_1^n m_j \chi_{(t_{j-1}, t_j]}.\] Then \[\int G_p \d m = S_P f, \ \ \ \ \int g_L \d m = s_P f.\] Let $\{P_k\}$ be a sequence of partitions with mesh size tending to zero, obtained by refining the previous partition ($P_k \subset P_{k+1}$), such that $g_{P_k}$ is increasing, $G_{P_k}$ is decreasing, and $S_{P_k} f, s_{P_k} f \to \int_a^b f \d x$. Now let \[g = \lim_k g_{P_k}, \ \ \ \ G = \lim_k G_{P_k}.\] Then $g \leq f \leq G$ and by DCT, we have that \[\int_{[a, b]} g \d m = \int_a^b f \d x = \int_{[a, b]} G \d m.\] Hence \[\int(G - g) \d m = 0\] and since $G - g \geq 0$, \cref{prop:L-plus-zero-ae} implies that $G = g = f$ a.e. Since $G$ is measurable and $m$ is complete, \cref{prop:equal-ae-iff-complete-measure} implies that $f$ is measurable and \[\int_{[a, b]} f \d m = \int_a^b f \d x.\]
+\end{proof}
+
+
 
 \pagebreak
 
