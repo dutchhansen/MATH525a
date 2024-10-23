@@ -144,7 +144,7 @@ Let $f : X \to Y$. For any indexed collection of subsets $\{E_\alpha\}$, it hold
 
 \subsubsection{Standard Topology}
 
-Recall that the standard topology on $\R$ is the topology whose basis is all open intervals. Considering $\ol{\R}$, let \[\CB_1 = \{(a, b) :  a, b \in \R, a < b\}, \ \ \ \CB_2 = \{[-\infty, a) : a \in \R\}, \ \ \ \CB_3 = \{(b, + \infty] : b \in \R\}.\] Now let $\ol{\CB} = \CB_1 \cup \CB_2 \cup \CB_3$. Since this collection covers $X$ and satisfies the intersection property, it is a basis for a topology $\ol{\CT}$, which we refer to as the standard topology on $\ol{\R}$. This topology is also compactible with the standard topology $\CT$ on $\R$. 
+Recall that the standard topology on $\R$ is the topology whose basis is all open intervals. Considering $\ol{\R}$, let \[\CB_1 = \{(a, b) :  a, b \in \R, a < b\}, \ \ \ \CB_2 = \{[-\infty, a) : a \in \R\}, \ \ \ \CB_3 = \{(b, + \infty] : b \in \R\}.\] Now let $\ol{\CB} = \CB_1 \cup \CB_2 \cup \CB_3$. Since this collection covers $X$ and satisfies the intersection property, it is a basis for a topology $\ol{\CT}$, which we refer to as the standard topology on $\ol{\R}$. This topology is also compatible with the standard topology $\CT$ on $\R$, in the following sense.
 
 \begin{proposition}
     Let $\CT$ and $\ol{\CT}$ be the standard topologies for $\R$ and $\ol{\R}$, respectively. Let $E \subset \ol{\R}$. Then $E \in \ol{\CT}$ if and only if $E \cap \R \in \CT$.
@@ -158,12 +158,84 @@ Most of our work amounts to studying familiar definitions with the special case 
 
 \begin{proposition}
     Let $\ol{\R}$ have the standard topology. Then \begin{enumerate}
-        \item If $U$ is a neighborhood of $+\infty$ in $\ol{\R}$, theen there exists $M \in \R$ such that $(M, +\infty] \subset U$.
+        \item If $U$ is a neighborhood of $+\infty$ in $\ol{\R}$, then there exists $M \in \R$ such that $(M, +\infty] \subset U$.
         \item If $A \subset \R$ and $A$ is not bounded above in $\R$, then $+\infty$ is a limit point of $A$ with respect to $\ol{\R}$.
     \end{enumerate}
 \end{proposition}
 
-\subsubsection{asdf}
+\begin{proposition}[Infinite limits, limits at infinity]
+    \begin{enumerate}
+        \item Let $A \subset \R$, let $p \in \R$ be a limit point of $A$ with respect to $\R$, and let $f : A \to \ol{\R}$ be a function. Then $\lim_{x \to p} f(x) = +\infty$ if and only if for every $L \in \R$, there exists some $\delta > 0$ such that $0 < |x-p| < \delta$ and $x \in A$ together imply that $f(x) > L$.
+        \item Let $B \subset \R$ that is not bounded above in $\R$, and let $g : B \to \ol{\R}$ be a ffunction. Let $q$ be a real number. Then $\lim_{x \to \infty} g(x) = q$ if and only if for every $\eps > 0$, there exists some $M \in \R$ such that $x > M$ and $x \in B$ together imply that $|g(x) - q| < \eps$.
+        \item Let $C \subset \R$ that is bot bounded above in $\R$, let $h : C \to \ol{\R}$ be a function. Then $\lim_{x \to \infty} h(x) = \infty$ if and only if for every $N \in \R$, there exists some $P \in \R$ such that $x > P$ and $x \in C$ together imply that $h(x) > N$.
+    \end{enumerate}
+\end{proposition}
+
+It turns out that while $\R$ is not compact, $\ol{\R}$ is compact. Before proceeding, it's worth noting that the standard topology on $\R$ is induced by the metic $\ol{d} : \ol{\R} \times \ol{\R} \to \R$.\[\ol{d}(x, y) = |f(x) - f(y)|, \ \ \ \ \text{where} \ \ \ \ f(x) = \begin{cases}
+    1 &x = \infty\\
+    \frac{x}{1+|x|} &x \in \R\\
+    -1 &x = -\infty.
+\end{cases}\]
+
+\begin{proposition}
+    $(\ol{R}, \ol{d})$ is a compact metric space.
+\end{proposition}
+
+\begin{proof}
+    Construct homeomorphism $f : [-\infty, \infty] \to [-1,1]$.
+\end{proof}
+
+\subsubsection{One-Sided Limits and Types of Discontinuities}
+
+We consider real-valued functions defined on some interval $(a, b)$ of $\R$. The discussion can be easily extended to the case where $a$ or $b$ are infinite, but we keep things simple by restricting to the latter case.
+
+\begin{definition}
+    Let $f : (a, b) \to \R$ be a function and assume $x \in [a, b)$. We write $f(x+) = q$ if whenever $(t_n)$ is a sequence in $(x, b)$ which converges to $x$, we have $f(t_n) \to q$. We call this the limit from the right. The limit from the left is analogous.
+\end{definition}
+
+\begin{remark}
+    Note that $f(x+)$ and $f(x-)$ may or may not exist. For $x \in (a, b)$, $\lim_{t \to x} f(x) = q$ is equivalent to $f(x+) = f(x-) = q$. That is, $f$ is continuous at $x \in (a,b)$ if and only if ${f(x+) = f(x-) = f(x)}$.
+\end{remark}
+
+\begin{definition}[Types of discontinuities]
+    Let $f : (a, b) \to \R$ be a function and let $x \in (a,b)$. Assume that $f(x+)$ and $f(x-)$ both exist. \begin{enumerate}
+        \item If $f(x+) = f(x-)$ but $f$ is not continuous at $x$, then we say that $f$ has a removable discontinuity at $x$.
+        \item If $f(x+) \neq f(x-)$, then we say that $f$ has a jump discontinuity at $x$. 
+    \end{enumerate} In either case, we say that $f$ has a discontinuity of the first kind at $x$. If one of $f(x+)$ or $f(x-)$ does not exist, then $f$ is said to have an essential discontinuity, or discontinuity of the second kind, at $x$.
+\end{definition}
+
+\subsubsection{Monotonic Functions and Sequences}
+
+\begin{theorem}
+    Let $f : (a, b) \to \R$ be monotonically increasing on $(a, b)$ and let $x \in (a, b)$. Then \[f(x-) = \sup\{f(t) : t \in (a, x)\}, \ \ \ \ f(x+) = \inf\{f(t) : t \in (x, b)\}.\] In particular, $f(x-)$ and $f(x+)$ both exist in $\R$, and $f(x-) \leq f(x) \leq f(x+)$.
+\end{theorem}
+
+\begin{corollary}
+    Let $f : (a, b) \to \R$ be monotonically increasing and assume that $a < x < y < b$. Then $f(x+) \leq f(y-)$.
+\end{corollary}
+
+\begin{corollary}
+    Any monotonic function $f : (a, b) \to \R$ has no discontinuities of the second kind.
+\end{corollary}
+
+\begin{theorem}
+    Let $f : (a, b) \to \R$ be monotonically increasing and denote by $E$ the subset of $(a, b)$ consisting of point at which $f$ is discontinuous. Then $E$ is at most countable.
+\end{theorem}
+
+\begin{theorem}
+    Let $(s_n)_{n=1}^{\infty}$ be a monotonically increasing sequence in $\ol{\R}$. Then $\lim_{n \to \infty} s_n$ exists in $\ol{\R}$ and is equal to $\sup_n s_n$. In particular, a monotonically increasing sequence of real number converges in $\R$ if and only if it is bounded.
+\end{theorem}
+
+\subsubsection{Upper and Lower Limits}
+
+\dhcomment{To complete.}
+
+\subsubsection{Limits of Special Sequences}
+
+\dhcomment{To complete.}
+
+
+\subsubsection{Folland etc.}
 
 From completeness, it follows that every sequence $(a_n)_{n=1}^{\infty}$ in $\ol{\R}$ has a limit inferior and limit superior. \[\limsup(a_n) := \inf_{k \geq 1} \left(\sup_{n \geq k} a_n \right), \ \ \ \ \ \ \liminf(a_n) := \sup_{k \geq 1} \left( \inf_{n \geq k} a_n \right).\]
 A sequence $(a_n)_{n=1}^{\infty}$ converges in $\R$ if and only if these two sequences are equal and finite, in which case the limit is their common value. One can also define these notions for functions $f : \R \to \ol{\R}$, for instance, \[\limsup_{x \to a} f(x) = \inf_{\delta > 0} \left( \sup_{0 < |z-a| < \delta} f(x) \right).\]
@@ -681,7 +753,7 @@ We will now use some of the tools we have to construct important measures. Speci
 
 We now investigate the properties of the Lebesgue-Stieltijes measures. For the remainder of the subsection, fix a complete Lebesgue-Stieltjes measure $\mu$ associated to the increasing right-continuous function $F$ and denote the domain $\sigma$-algebra of $\mu$ by $\SM_\mu$.
 
-\begin{lemma}
+\begin{lemma}\label{lem:lebesgue-stieltjes-alt-definition}
     For any $E \in \SM_\mu$, then \begin{align*}
         \mu(E) &= \inf \left\{ \sum_1^\infty \mu((a_j, b_j)) : E \subset \bigcup_1^\infty (a_j, b_j) \right\}.
     \end{align*}
@@ -730,6 +802,14 @@ We now investigate the properties of the Lebesgue-Stieltijes measures. For the r
 \begin{remark}
     This theorem is really saying that $\SM_\mu$ consists of Borel sets modulo null sets.
 \end{remark}
+
+\begin{proposition}\label{prop:lebesgue-stieltjes-symmetric-difference}
+    If $E \in \SM_\mu$ and $\mu(E) < \infty$, then for every $\eps > 0$, there is a set $A$ that is a finite union of open interals such that $\mu(E \Delta A) < \eps$.
+\end{proposition}
+
+\begin{proof}
+    Use \cref{lem:lebesgue-stieltjes-alt-definition}.
+\end{proof}
 
 \subsubsection{The Lebesgue Measure}
 
@@ -1079,7 +1159,7 @@ We now discuss several properties of these integrals.
 \end{corollary}
 
 \begin{proof}
-    Suppose $f_n(x)$ increases to $f(x)$ for $x \in E$ and $\mu(E^c) = 0$. We define $g_n = f_n \chi_E \nearrow g = f \chi_E$ for every $x$. Since $f_n = g_n$ a.e. and $g = f$ a.e., the previous proposition gives \[\int f = \int g \underset{\text{MCT}}{=} \lim_n \int g_n = \lim_n \int f_n.\]
+    Suppose $f_n(x)$ increases to $f(x)$ for $x \in E$ and $\mu(E^c) = 0$. We define $g_n := f_n \chi_E \nearrow g := f \chi_E$ for every $x$. Since $f_n = g_n$ a.e. and $g = f$ a.e., the previous proposition gives \[\int f = \int g \underset{\text{MCT}}{=} \lim_n \int g_n = \lim_n \int f_n.\]
 \end{proof}
 
 \subsection{Fatou's Lemma and Standard Counterexamples}
@@ -1115,7 +1195,7 @@ What happens when we drop the monotonicity assumption?
 \subsection{Integration of Complex-Valued Functions}
 
 \begin{definition}
-    If $f : X \to \R$ is measurable and at least one of $\int f^+$ or $\int f^-$ is finite, we define \[\int f = \int f^+ - \int f^-.\] If both $\int f^+$ and $\int f^-$ are finite, we say $f$ is integrable.\footnote{One must not confused the two notions introduced here: the integral $\int f$ may exist even when $f$ is not integrable.}
+    If $f : X \to \R$ is measurable and at least one of $\int f^+$ or $\int f^-$ is finite, we define \[\int f = \int f^+ - \int f^-.\] If both $\int f^+$ and $\int f^-$ are finite, we say $f$ is integrable.\footnote{One must not confused the two notions introduced here: the integral $\int f$ is a quantity on $\ol{\R}$, and this quantity may exist even when $f$ is not integrable.}
 \end{definition}
 
 \begin{proposition}
@@ -1131,7 +1211,7 @@ What happens when we drop the monotonicity assumption?
 \end{proof}
 
 \begin{definition}
-    If $f : X \to \C$ is measurable, we say that $f$ is integrable if $\int |f| < \infty$. For $E \in \SM$, we say that $f$ is integrable in $E$ if $\int_E |f| < \infty$. We define \[\int f = \int \Re f + i \int \Im f.\]
+    If $f : X \to \C$ is measurable, we say that $f$ is integrable if $\int |f| < \infty$. For $E \in \SM$, we say that $f$ is integrable on $E$ if $\int_E |f| < \infty$. We define \[\int f = \int \Re f + i \int \Im f.\]
 \end{definition}
 
 \begin{remark}
@@ -1188,13 +1268,49 @@ We may now define $L^1$ properly.
 \begin{remark}
     $L^1(\mu)$ is still a complex vector space. Although we will henceforth view $L^1(\mu)$ as a space of equivalence classes, we shall still employ the notation $f \in L^1(\mu)$ to mean that $f$ is an a.e.-defined integrable function. We make some further observations.\begin{itemize}
         \item There is a bijective corresondence between $L^1(\mu)$ and $L^1(\ol{\mu})$ by \cref{prop:equal-ae-function-complete-measure}.
-        \item $L^1$ is a metric space with metric $\rho(f, g) = \int |f-g|$.
+        \item $L^1$ is a metric space with metric $\rho(f, g) := \int |f-g|$. We denote this $(L^1, \rho)$.
+        \item More generally, $(L^1(\mu), \|\cdot\|_{L^1})$ is a normed vector space where $\|f\|_{L^1} := \int |f|$. The induced metric is exactly $\rho$.
         \item We refer to convergence with respect to the metric $\rho$ as \textit{convergence in $L^1$}; thus $f_n \to f$ in $L^1$ if and only if $\int |f_n - f| \to 0$.
     \end{itemize}
 \end{remark}
 
+\begin{theorem}[Dominated Convergence Theorem]
+    Let $\{f_n\}$ be a sequence in $L^1$ such that \begin{enumerate}
+        \item $f_n \to f$ a.e.,
+        \item there exists some $\R$-valued $g \in L^1$, $g \geq 0$ such that $|f_n| \leq g$ for all $n \in \N$.
+    \end{enumerate}
+    Then $f \in L^1$ and $\int f = \lim_{n\to \infty} \int f_n$.
+\end{theorem}
 
+\begin{proof}
+    Note that $f$ is measurable as the a.e. limit of measurable functions, by \cref{prop:equal-ae-function-complete-measure}. Since $|f| \leq g$, we have $f \in L^1$. Now, we may assume $f_n$ and $f$ are real-valued, otherwise taking imaginary and real parts. So $g + f_n \geq 0$ a.e. and $g - f_n \geq 0$ a.e. By the corollary to Fatou's lemma, \[\int g + \int f \leq \liminf_n \int g + f_n = \int g + \liminf_n \int f_n.\] We also have \[\int g - \int f \leq \liminf_n \int g - f_n = \int g - \limsup_n \int f_n.\] That is, \[\liminf_n \int f_n \geq \int f \geq \limsup_n \int f_n.\] We have $\int f = \lim_{n \to \infty} \int f_n$.
+\end{proof}
 
+\begin{theorem}
+    Suppose $\{f_j\}$ is a sequence in $L^1$ such that $\sum_1^\infty \int |f_j| < \infty$. Then $\sum_1^\infty f_j$ converges a.e. to a function in $L^1$ and \[\int \sum_1^\infty f_j = \sum_1^\infty \int f_j.\]
+\end{theorem}
+
+\begin{proof}
+    Note that $|f_j| \in L^+$, so \[\int \sum_1^\infty |f_j| = \sum_1^\infty \int |f_j| < \infty.\] Hence, we can define $g = \sum_1^\infty |f_j| \in L^1$, and note that $\sum_1^\infty |f_j| < \infty$ holds a.e.\footnote{In the homework, we show that if $f \in L^+$ and $\int f < \infty$, then $f^{-1}(\{\infty\})$ is a null set and $f^{-1}((0, \infty])$ is $\sigma$-finite.} For such $x$ not contained in the null set, the $N$th partial sum $F_N(x) = \sum_1^N f_j(x)$ converges to $\sum_1^\infty f_j(x)$. We also note that \[\left|\sum_1^N f_j \right| \leq g.\] Applying DCT, we have \[\int \sum_1^\infty f_j = \lim_N \int F_N = \sum_1^\infty \int f_j.\]
+\end{proof}
+
+We can use this therem to prove a nice approximation result.
+
+\begin{theorem}
+    Let $f \in L^1(\mu)$ and $\eps > 0$. Then we can find a simple function $\phi$ such that $\|f - \phi\|_{L^1} < \eps$. It follows that simple functions are dense in $(L^1(\mu), \rho)$. Also, if $\mu$ is a Lebesgue-Stieltjes measure on $\R$, then the sets $E_j$ in the standard representation $\phi = \sum_1^N a_j \chi_{E_j}$ can be chosen as a finite union of open intervals. Moreover, there exists a continuous function $g$, vanishing outside a bounded interval, such that $\|f - g\|_{L^1} < \eps$.
+\end{theorem}
+
+\begin{proof}
+    Take $\{\phi_n\}$ as in \cref{thm:simple-function-approximation}. If $f$ maps into $[0, \infty]$, then \[\phi_n := \sum_{k = 0}^{2^{2n} - 1} k 2^{-n} \chi_{E_n^k} + 2^n \chi F_n, \ \ \ E_n^k := f^{-1}\Big((k2^{-n}, (k+1)2^{-n}]\Big), \ \ \ F_n := f^{-1}\Big( (2^n, \infty]\Big).\] For general $f$, we consider \[(\Re f)^{\pm}, \ \ \ (\Im f)^{\pm}.\] Since $|\phi_n - f| \leq 2|f|$ and $|\phi_n - f| \to 0$, we can apply DCT. This gives \[\int |\phi_n - f| < \eps, \ \ \ \text{for sufficiently large $n$}.\]
+
+    To see the second claim, write the standard representation $\phi_n = \sum_1^N a_j \chi_{E_j}$ where the sets $E_j$ are disjoint and $a_j \neq 0$. Then \[\mu(E_j) = \frac{1}{|a_j|} \int_{E_j}|\phi_n| \leq \frac{1}{|a_j|} \int |f| < \infty.\] Moreover, if $E$ and $F$ are measurable sets, we have $\mu(E \Delta F) = \int |\chi_E - \chi_F|$. Hence, since $\mu$ is a Lebesgue-Stieltjes measure on $\R$, and by \cref{prop:lebesgue-stieltjes-symmetric-difference}, we can approximate $\chi_{E_j}$ arbitrarily close in the $L^1$ metric by finite sums of functions $\chi_{I_k}$ where $I_k$ are open intervals. Finally, if $I_k = (a, b)$, we can approximate $\chi_{I_k}$ in the $L^1$ metric by continuous functions that vanish outside of $(a, b)$. For example, given $\eps > 0$, take $g : \R \to \R$ to be the function \[g(x) = \begin{cases}
+        0 &x \in (-\infty, a] \cup [b, \infty)\\
+        1 &x \in [a + \eps, b - \eps]\\
+        \frac{x-a}{a+\eps} &x \in (a, a+ \eps)\\
+        \frac{x- (b - \eps)}{b} &x \in (b-\eps, b).
+    \end{cases}\]
+    More generally, we can approximate any simple function $\R \to \C$ by a continuous function arbitrarily close in $L^1$.
+\end{proof}
 
 \pagebreak
 
