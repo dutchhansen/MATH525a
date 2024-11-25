@@ -115,7 +115,7 @@ Let $f : X \to Y$. For any indexed collection of subsets $\{E_\alpha\}$, it hold
     
     We aim to apply Zorn's lemma to $\CW$. Let $C$ be a totally ordered subset of $\CW$; we must produce some well-ordering $u = (U, \leq_U) \in \CW$ such that $x \leq_\CW u$ for all $x \in C$. Start by letting $C$ be a chain and defining \[S = \{E \subset X : E \ \ \text{is well-ordered by element of C}\}.\] Now take the union of all these subsets, \[U = \bigcup_{E \in S} E.\] Now define $\leq_U$ by $x \leq_U y$ whenever $x, y \in K$ and $x \leq_K y$ for some $(K, \leq_K) \in C$. 
     
-    To see that $u \in \CW$, take an element and nonempty subset $a \in A \subset U$. By definition of $U$, we have $a \in (W, \leq_W) \in C$ for some $W$, and there is a minimal element $m \in W \cap S$ since $W$ is well-ordered. Now for arbitrary $a' \in A$, if $a' \in W$, it follows that $m \leq_W a'$, and if $a' \notin W$, then $a' \in (W', \leq_{W'}) \in C$. But since $C$ is a chain we have $(W, \leq_W) \leq_{\CW} (W', \leq_{W'})$, and so $m \leq_{W'} a'$. Since we take $\leq_U$ as the union of orders, $m \leq_U a'$, and $m$ is minimal in $A$. That is, $u \in \CW$. \dhcomment{Come back and check that $u$ is actually totally ordered, which is necessary for well-ordering.}
+    To see that $u \in \CW$, take an element and nonempty subset $a \in A \subset U$. By definition of $U$, we have $a \in (W, \leq_W) \in C$ for some $W$, and there is a minimal element $m \in W \cap S$ since $W$ is well-ordered. Now for arbitrary $a' \in A$, if $a' \in W$, it follows that $m \leq_W a'$, and if $a' \notin W$, then $a' \in (W', \leq_{W'}) \in C$. But since $C$ is a chain we have $(W, \leq_W) \leq_{\CW} (W', \leq_{W'})$, and so $m \leq_{W'} a'$. Since we take $\leq_U$ as the union of orders, $m \leq_U a'$, and $m$ is minimal in $A$. That is, $u \in \CW$. 
 
     To see that $u$ is an upper bound for $C$ in $\CW$, note that for any $(W, \leq_W) \in C$, $W \subset U$. Next, note that by defintion of $\leq_U$, $\leq_U$ agrees with $\leq_W$. Finally, for any $w' \in U \setminus W$ and $w \in W$, we have $w' \in W'$ for some $W'$ where $W' \setminus W \neq \emptyset$. Now by total ordering of $C$, it must be so that $W \leq_\CW W'$, so $w \leq_U w'$. Hence, $C$ is an upper bound for $C$. 
 
@@ -138,7 +138,15 @@ Let $f : X \to Y$. For any indexed collection of subsets $\{E_\alpha\}$, it hold
     Take $Y = f(A)$ where $f \in \prod_{\alpha \in A} X_\alpha$.
 \end{proof}
 
-\noindent While we have deduced the Axiom of Choice from the Hausdorff principle, the two are in fact equivalent.
+\noindent While we have deduced the Axiom of Choice from the Hausdorff principle, the two are in fact equivalent. The following principle is also useful in some proofs, though not mentioned in Folland.
+
+\begin{principle}[Axiom of Dependent Choice]
+    Let $\CR$ be a binary relation on a nonempty set $S$. Suppose that \[\forall a \in S, \ \exists b \in S : a \CR b.\] Then there exists a sequence $(x_n) \in S^\N$ such that for all $n \in \N$, $x_n \CR x_{n+1}$.
+\end{principle}
+
+\begin{proposition}
+    The Axiom of Choice implies the Axiom of Dependent Choice.
+\end{proposition}
 
 \subsection{The Extended Reals}
 
@@ -745,7 +753,7 @@ We will now use some of the tools we have to construct important measures. Speci
     \begin{enumerate}
         \item The theory could be equally well be developed using intervals of the form $[a, b)$ and left-continuous functions $F$.
         \item If $\mu$ is a finite Borel measure on $\R$, then $\mu = \mu_F$ where $F(x) = \mu((-\infty, x])$, and we call $F$ the cumulative distribution function of $\mu$. This differs from the function defined in \cref{thm:borel-measure-correspondence} by the constant $\mu((-\infty, 0])$.
-        \item By the Caratheodory theorem, each increasing right-continuous function $F$ gives us, not only a Borel measure $\mu_F$, but a complete measure $\ol{\mu}_F$ whose domain includes $\SB_\R$, where $\ol{\mu}_F$ is the completion of $\mu_F$ \citep[Exercise~22a]{folland1999real}. One can show that the domain will always be strictly larger that of $\SB_\R$. We call $\ol{\mu}_F$ the Lebesgue-Stieltjes measure associated to $F$.
+        \item By the Caratheodory theorem, each increasing right-continuous function $F$ gives us, not only a Borel measure $\mu_F$, but a complete measure $\ol{\mu}_F$ whose domain includes $\SB_\R$. In fact, $\ol{\mu}_F$ is just the completion of $\mu_F$ \citep[Exercise~22a]{folland1999real} or \cref{thm:characterizing-lebesgue-steiltjes-measurable-sets}. One can show that the domain will always be strictly larger that of $\SB_\R$. We call $\ol{\mu}_F$ the Lebesgue-Stieltjes measure associated to $F$. \dhcomment{Come back and include treatment of result showing that $\ol{\mu_F}$ is completion.}
     \end{enumerate}
 \end{remark}
 
@@ -764,7 +772,7 @@ We now investigate the properties of the Lebesgue-Stieltijes measures. For the r
         \mu(E) &= \inf \left\{ \sum_1^\infty \Big(F(b_j) - F(a_j) \Big) : E \subset \bigcup_1^\infty (a_j, b_j] \right\}\\
         &= \inf \left\{ \sum_1^\infty \mu((a_j, b_j]) : E \subset \bigcup_1^\infty (a_j, b_j] \right\}.
     \end{align*}
-    Now define \[\nu(E) = \inf \left\{ \sum_1^\infty \mu((a_j, b_j)) : E \subset \bigcup_1^\infty (a_j, b_j) \right\}.\] We want to show $\mu(E) = \nu(E)$. To see that $\mu(E) \leq \nu(E)$, start by supposing that $E \subset \bigcup_1^{\infty} (a_j, b_j)$. Each $(a_j, b_j)$ can be written as a countable disjoint union of $h$ intervals $\{I_j^k\}_k$. Specifically, $I_j^k = (c_j^k, c_j^{k+1}]$ where $\{c_j\}_j$ is any sequence such that $c_j^1 = a_j$ and $c_j^k$ increases to $b_j$ as $k \to \infty$. Thus, \[E \subset \bigcup_{j, k} I_j^k.\] In particular, we have \[\sum_1^{\infty} \mu((a_j, b_j)) = \sum_{j, k} \mu(I_j^k) \geq \mu(E).\] Since this covering was arbitrary, $\nu(E) \geq \mu(E)$.
+    Now define \[\nu(E) = \inf \left\{ \sum_1^\infty \mu((a_j, b_j)) : E \subset \bigcup_1^\infty (a_j, b_j) \right\}.\] We want to show $\mu(E) = \nu(E)$. To see that $\mu(E) \leq \nu(E)$, start by supposing that $E \subset \bigcup_1^{\infty} (a_j, b_j)$. Each $(a_j, b_j)$ can be written as a countable disjoint union of $h$ intervals $\{I_j^k\}_k$. Specifically, $I_j^k = (c_j^k, c_j^{k+1}]$ where $\{c_j^k\}_k$ is any sequence such that $c_j^1 = a_j$ and $c_j^k$ increases to $b_j$ as $k \to \infty$. Thus, \[E \subset \bigcup_{j, k} I_j^k.\] In particular, we have \[\sum_1^{\infty} \mu((a_j, b_j)) = \sum_{j, k} \mu(I_j^k) \geq \mu(E).\] Since this covering was arbitrary, $\nu(E) \geq \mu(E)$.
 
     On the other hand, given $\eps > 0$, there exists $\{(a_j, b_j]\}_1^{\infty}$ where $E \subset \bigcup_1^{\infty} (a_j, b_j]$ and $\sum_1^{\infty} \mu((a_j, b_j]) \leq \mu(E) + \eps$. Moreover, for each $j$, there exists some $\delta_j > 0$ such that $F(b_j + \delta_j) - F(b_j) < \eps 2^{-j}$. Then $E \subset \bigcup_1^{\infty} (a_j, b_j + \delta_j)$ and \[\sum_1^\infty \mu((a_j, b_j + \delta_j)) \leq \sum_1^\infty \mu((a_j, b_j]) + \eps \leq \mu(E) + 2\eps.\] Since the cover was arbitrary, $\nu(E) \leq \mu(E)$.
 \end{proof}
@@ -777,7 +785,7 @@ We now investigate the properties of the Lebesgue-Stieltijes measures. For the r
 \end{theorem}
 
 \begin{proof}
-    By the previous lemma, for any $\eps > 0$, there exists intervals $(a_j, b_j)$ such that $E \subset \bigcup_1^\infty (a_j, b_j)$ and $\mu(E) \leq \sum_1^\infty \mu((a_j, b_j)) + \eps$. If we define $U = \bigcup_1^\infty (a_j, b_j)$, then $U$ is open, $U \supset E$, and $\mu(U) \leq \mu(E) + \eps$. On the other hand, $\mu(U) \geq \mu(E)$ whenever $U \supset E$, so the first equality is valid.
+    By the previous lemma, for any $\eps > 0$, there exists intervals $(a_j, b_j)$ such that $E \subset \bigcup_1^\infty (a_j, b_j)$ and $\sum_1^\infty \mu((a_j, b_j)) \leq \mu(E) + \eps$. If we define $U = \bigcup_1^\infty (a_j, b_j)$, then $U$ is open, $U \supset E$, and $\mu(U) \leq \mu(E) + \eps$. On the other hand, $\mu(U) \geq \mu(E)$ whenever $U \supset E$, so the first equality is valid.
 
     For the second equality, first suppose that $E$ is bounded. If $E$ is closed, then $E$ is compact and the equality is obvious. Otherwise, given $\eps > 0$, we can choose an open set $U \supset \ol{E} \setminus E$ such that $\mu(U) \leq \mu(\ol{E} \setminus E) + \eps$, by the earlier paragraph. Let $K = \ol{E} \setminus U$, so $K$ compact and $K \subset E$. Also, \begin{align*}
         \mu(K) &= \mu(E) - \mu(E \cap U) = \mu(E) - [\mu(U) - \mu(U\setminus E)]\\
@@ -786,7 +794,7 @@ We now investigate the properties of the Lebesgue-Stieltijes measures. For the r
     If $E$ is unbounded, let $E_i = E \cap (j, j+1]$. The the preceding argument, for any $\eps > 0$, there exists compact $K_j \subset E_j$ such that $\mu(K_j) \geq \mu(E_j) - \eps2^{-j}$. Let $H_n = \bigcup_{-n}^{n} K_j$, so $H_n$ is compact, $H_n \subset E$, and for any $n \in \N$, $\mu(H_n) \geq \mu(\bigcup_{-n}^{n} E_j) - \eps$. Since $\mu(E) = \lim_{n \to \infty} \mu(\bigcup_{-n}^{n}E_j)$, the result follows.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thm:characterizing-lebesgue-steiltjes-measurable-sets}
     If $E \subset \R$, then the following are equivalent.\begin{enumerate}
         \item $E \in \SM_\mu$,
         \item $E = V \setminus N_1$ where $V$ is a $G_\delta$ set and $\mu(N_1) = 0$,
@@ -796,7 +804,7 @@ We now investigate the properties of the Lebesgue-Stieltijes measures. For the r
 
 \begin{proof}
     It's clear that (b) and (c) imply (a) since $\mu$ is complete on $\SM_\mu$. Suppose that $E \in \SM_\mu$ and $\mu(E) < \infty$. By the theorem above, for $j \in \N$, we can choose an open $U_j \supset E$ and compact $K_j \subset E$ such that \[\mu(U_j) - 2^{-j} \leq \mu(E) \leq \mu(K_j) + 2^{-j}.\]
-    Let $V = \bigcap_1^\infty U_j$ and $H = \bigcup_1^\infty K_j$. Then $H \subset E \subset V$ and $\mu(V) = \mu(H) = \mu(E) < \infty$. Hence, $\mu(V \setminus E) = \mu(E \setminus H) = 0$. The result is thus proved when $\mu(E) < \infty$; an extension to the general case is left to \citet[Exercise~25]{folland1999real}.
+    Let $V = \bigcap_1^\infty U_j$ and $H = \bigcup_1^\infty K_j$. Then $H \subset E \subset V$ and $\mu(V) = \mu(H) = \mu(E) < \infty$. Hence, $\mu(V \setminus E) = \mu(E \setminus H) = 0$. The result is thus proved when $\mu(E) < \infty$; an extension to the general case is left to \citet[Exercise~25]{folland1999real}, and leverages $\sigma$-finiteness.
 \end{proof}
 
 \begin{remark}
@@ -1246,7 +1254,7 @@ We denote the vector space of complex-valued integrable functions under measure 
     \end{align*}
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{prop:integrable-functions-equal-ae}
     \begin{enumerate}
         \item If $f \in L^1$, then $\{x : f(x) \neq 0\}$ is $\sigma$-finite.
         \item If $f, g \in L^1$, then $\int_E f = \int_E g$ for all $E \in \SM$ if and only if $\int |f - g| = 0$ if and only if $f = g$ a.e.
@@ -1300,7 +1308,7 @@ We may now define $L^1$ properly.
 
 We can use this therem to prove a nice approximation result.
 
-\begin{theorem}
+\begin{theorem}\label{thm:2.26}
     Let $f \in L^1(\mu)$ and $\eps > 0$. Then we can find a simple function $\phi$ such that $\|f - \phi\|_{L^1} < \eps$. It follows that simple functions are dense in $(L^1(\mu), \rho)$. Also, if $\mu$ is a Lebesgue-Stieltjes measure on $\R$, then the sets $E_j$ in the representation $\phi = \sum_1^N a_j \chi_{E_j}$ can be chosen as a finite union of open intervals. Moreover, there exists a continuous function $g$, vanishing outside a bounded interval, such that $\|f - g\|_{L^1} < \eps$.
 \end{theorem}
 
@@ -1459,15 +1467,16 @@ If $f_n \to f$ a.e., it does not follow that $f_n \to f$ in measure, as example 
 
 Letz $(X, \SM, \mu)$ and $(Y, \SN, \nu)$ be measure spaces. We have already discussed the product $\sigma$-algebra $\SM \otimes \SN$ on $X \times Y$; we now construct a measure on $\SM \otimes \SN$. To start, define a (measurable) rectangle to be a set of the form $A \times B$ where $A \in \SM$ and $B \in \SN$. We have \[(A \times B) \cap (E \times F) = (A \cap E) \times (B \cap F), \ \ \ \ (A \times B)^c = (X \times B^c) \cup (A^c \times B).\] Using our proposition about elementary families, the collection $\SA$ of finite disjoint unions of rectangles is an algebra, and by \cref{prop:1.4}, the $\sigma$-algebra it generates is $\SM \otimes \SN$.
 
-To start , suppose $A \times B$ is a rectangle that is a (finite or countable) disjoint union of rectangles $A_j \times B_j$. Then for $x \in X$ and $y \in Y$, \[\chi_A(x) \chi_B(y) = \chi_{A \times B} (x, y) = \sum \chi_{A_j \times B_j}(x, y) = \sum \chi_{A_j} (x) \chi_{B_j}(y).\] Integrating with respect to $x$, adopting the usual convention that $0 \cdot \infty = 0$, and recalling \cref{thm:2.15}, we have \begin{align*}
-    \mu(A) \chi_B(y) = \int \chi_A(x)\chi_B(y) \d \mu(x) = \sum_j \int \chi_{A_j} (x) \chi_{B_j}(y) \d \mu(x) = \sum_j \mu(A_j) \chi_{B_j}(y).
+To start , suppose $A \times B$ is a rectangle that is a (finite or countable) disjoint union of rectangles $A_j \times B_j$. Then for $x \in X$ and $y \in Y$, \[\chi_A(x) \chi_B(y) = \chi_{A \times B} (x, y) = \sum \chi_{A_j \times B_j}(x, y) = \sum \chi_{A_j} (x) \chi_{B_j}(y).\] Integrating with respect to $x$ and recalling \cref{thm:2.15}, we have \begin{align*}
+    \mu(A) \chi_B(y) = \int \chi_A(x)\chi_B(y) \d \mu(x) = \sum_j \int \chi_{A_j} (x) \chi_{B_j}(y) \d \mu(x) = \sum_j \mu(A_j) \chi_{B_j}(y),
 \end{align*}
+where we adopt the usual convention that $0 \cdot \infty = 0$.
 In the same way, integration in $y$ then yields \[\mu(A) \mu(B) = \sum_j \mu(A_j) \nu(B_j).\]
 It follows that if $E \in \SA$ is the disjoint union of rectangles $A_1 \times B_1, \ldots, A_n \times B_n$ and we set \[\pi(E) = \sum_1^n \mu(A_j)\nu(B_j),\] then $\pi$ is well-defined on $\SA$ (since any two representations of $E$ as a finite disjoint union of rectangles have a common refinement), and $\pi$ is a premeasure on $\SA$. By \cref{thm:premeasure-induced-measure}, $\pi$ generates an outer measure on $X \times Y$ whose restriction to $\SM \otimes \SN$ is a measure that extends $\pi$. We call this measure the product of $\mu$ and $\nu$ and denote it by $\mu \times \nu$.
 
 If $\mu, \nu$ are $\sigma$-finite, then $X = \bigcup_1^\infty A_j$, $Y = \bigcup_1^\infty B_j$ where $\mu(A_j) < \infty$ and $\nu(B_j) < \infty$. Hence, $X \times Y = \bigcup_{j,k} A_j \times B_k$ and $(\mu \times \nu)(A_j \times B_k) < \infty$. So the product measure is $\sigma$-finite. In this case, by \cref{thm:premeasure-induced-measure}, $\mu \times \nu$ is the unique measure on $\SM \otimes \SN$ such that $(\mu \times \nu)(A \times B) = \mu(A)\nu(B)$ for all rectangles $A \times B$.
 
-The same construction works for any finite number of factors. Suppose that $(X_j, \SM_j, \mu_j)$ are measure spaces for $j \in [n]$. If we define a rectangle to be a set of the form $A_1 \times \cdots \times A_n$ with $A_j \in \SM_j$, then the collection $\SA$ of finite disjoint unions of rectangles is an algebra, and the same procedure as above produces a measure $\mu_1 \times \cdots \times \mu_n$ on $\bigotimes_{1}^{n} \SM_j$ such that for rectangles $A_1 \times \cdots \times A_n$, \[\mu_1 \times \cdots \times \mu_n(A_1 \times \cdots A_n) = \prod_1^n \mu_j(A_j).\] Moreover, if the $\mu_j$'s are $\sigma$-finite so that the extension from $\SA$ to $\bigotimes_1^n \SM_j$ is uniquely deteremined, then the obvious associativity property holds.\footnote{For example. if we identify $X_1 \times X_2 \times X_3$ with $(X_1 \times X_2) \times X_3$, we have $\SM_1 \otimes \SM_2 \otimes \SM_3 = (\SM_1 \otimes \SM_2) \otimes \SM_3$ (these two being formed by different kinds rectangles), and $\mu_1 \times \mu_2 \times \mu_3 = (\mu_1 \times \mu_2) \times \mu_3$ (since they agree on sets of the form $A_1 \times A_2 \times A_3$, and hence in general by uniqueness). Details are left to the reader (Exercise 45).}
+The same construction works for any finite number of factors. Suppose that $(X_j, \SM_j, \mu_j)$ are measure spaces for $j \in [n]$. If we define a rectangle to be a set of the form $A_1 \times \cdots \times A_n$ with $A_j \in \SM_j$, then the collection $\SA$ of finite disjoint unions of rectangles is an algebra, and the same procedure as above produces a measure $\mu_1 \times \cdots \times \mu_n$ on $\bigotimes_{1}^{n} \SM_j$ such that for rectangles $A_1 \times \cdots \times A_n$, \[\mu_1 \times \cdots \times \mu_n(A_1 \times \cdots \times A_n) = \prod_1^n \mu_j(A_j).\] Moreover, if the $\mu_j$'s are $\sigma$-finite so that the extension from $\SA$ to $\bigotimes_1^n \SM_j$ is uniquely deteremined, then the obvious associativity property holds.\footnote{For example. if we identify $X_1 \times X_2 \times X_3$ with $(X_1 \times X_2) \times X_3$, we have $\SM_1 \otimes \SM_2 \otimes \SM_3 = (\SM_1 \otimes \SM_2) \otimes \SM_3$ (these two being formed by different kinds rectangles), and $\mu_1 \times \mu_2 \times \mu_3 = (\mu_1 \times \mu_2) \times \mu_3$ (since they agree on sets of the form $A_1 \times A_2 \times A_3$, and hence in general by uniqueness). Details are left to the reader (Exercise 45).}
 
 All of the following results have obvious extensions to products with $n$ factors, but for simplicity, we return to the case of two measure spaces $(X, \SM, \mu)$ and $(Y, \SN, \nu)$. If $E \subset X \times Y$ for $x \in X$ and $y \in Y$, we define the $x$-section $E_x$ and $y$-section $E^y$ of $E$ by \[E_x = \{y \in Y : (x, y) \in E\}, \ \ \ \ E^y = \{x \in X : (x, y) \in E\}.\] Also, if $f$ is a function on $X \times Y$, we define the $x$-section $f_x$ and $y$-section $f^y$ of $f$ by \[f_x(y) = f^y(x) = f(x, y).\] Thus, for example $(\chi_E)_x = \chi_{E_x}$ and $(\chi_E)^y = \chi_{E^y}$.
 
@@ -1521,7 +1530,7 @@ As a technical tool for the upcoming proof, we define a monotone class on a spac
 \begin{theorem}[Fubini-Tonelli]
     Let $(X, \SM, \mu)$ and $(Y, \SN, \nu)$ be $\sigma$-finite. \begin{enumerate}
         \item (Tonelli) If $f \in L^+(X \times Y, \mu \times \nu)$, then the functions $g(x) = \int f_x \d \nu$ and $h(y) = \int f^y \d \mu$ are in $L^+(X, \mu)$ and $L^+(Y, \nu)$, respectively, and \begin{align}\label{eq:fubini-tonelli}
-            \int f \d(\mu \times \nu) = \int \int f(x,y) \d \nu(y) \d \mu(x) = \int \int f(x, y) \d \mu(x) \d \nu(y).
+            \int f \d(\mu \times \nu) = \int \left( \int f(x,y) \d \nu(y) \right) \d \mu(x) = \int \left( \int f(x, y) \d \mu(x) \right) \d \nu(y).
         \end{align}
         \item (Fubini) If $f \in L^1(\mu \times \nu)$, then $f_x \in L^1(\nu)$ for a.e. $x \in X$, $f^y \in L^1(\mu)$ for a.e. $y \in Y$, the a.e.-defined functions $g(x) = \int f_x \d \nu$ and $h(x) = \int f^y \d \nu$ are in $L^1(\mu)$ and $L^1(\nu)$, respectively, and \cref{eq:fubini-tonelli} holds.
     \end{enumerate}
@@ -1532,6 +1541,421 @@ As a technical tool for the upcoming proof, we define a monotone class on a spac
         \int g \d \mu &= \lim_{n \to \infty} \int g_n \d \mu = \lim_{n \to \infty} \int f_n \d (\mu \times \nu) = \int f \d (\mu \times \nu)\\
         \int h \d \nu &= \lim_{n \to \infty} \int h_n \d \nu = \lim_{n \to \infty} \int f_n \d (\mu \times \nu) = \int f \d (\mu \times \nu),
     \end{align*} which is \cref{eq:fubini-tonelli}. This establishes Tonelli's theorem, and also shows that if $f \in L^+(X \times Y, \mu \times \nu)$ and $\int f \d (\mu \times \nu) < \infty$, then $g < \infty$ a.e. and $h < \infty$ a.e. In particular, $f_x \in L^1(Y, \nu)$ for a.e. $x$ and $f^y \in L^1(X, \mu)$ for a.e. $y$. If $f \in L^1(X \times Y, \mu \times \nu)$, then the conclusion of Fubini's theorem follows by applying these results to the positive and negative parts of the real and imaginary parts of $f$.
+\end{proof}
+
+\begin{remark}
+    A few notes are in order.\begin{itemize}
+        \item We shall usually omit parentheses in the iterated integrals in \cref{eq:fubini-tonelli}. Thus, \[\int \left( \int f(x, y) \d \mu(x) \right) \d \nu(y) = \int \int f(x, y) \d \mu(x) \d \nu(y) = \int \int f \d\mu \d \nu.\]
+        \item The hypothesis of $\sigma$-finiteness is necessary; see Exercise 46 in Folland.
+        \item The hypothesis $f \in L^+(X \times Y, \mu \times \nu)$ or $f \in L^1(X \times Y, \mu \times \nu)$ is necessary, in two respects. First, it is possible for $f_x$ and $f^y$ to be measurable for all $x, y$ and for the iterated integrals $\int \int f \d \mu\d \nu$ and $\int \int f \d\nu\d\mu$ to exist even if $f$ is not $(\SM \otimes \SN)$-measurable. However, the iterated integrals need not then be equal; see Exercise 47. Second, if $f$ is nonnegative, it is possible for $f_x$ and $f^y$ to be integrable for all $x$ and $y$ and for the iterated integrals $\int \int f \d\mu\d\nu$ and $\int \int f \d\nu\d\mu$ to exist even if $\int |f| \d(\mu \times \nu) = \infty$. Again, the iterated integrals need not be equal; see Exercise 48.
+        \item  Typical usage of this theorem consists of: since $|f| \geq 0$, we can apply Tonelli's theorem to check that $|f| \in L^1$, then we can apply Fubini to exchange the order of integration.
+    \end{itemize}
+\end{remark}
+
+Even if $\mu$ and $\nu$ are complete, $\mu \times \nu$ is almost never complete.\footnote{Indeed, let $A$ be a $\mu$-null set and $E$ be a non-measurable set in $Y$. Then $A \times E \subset A \times Y$, which is a null set, but $A \times E \notin \SM \otimes \SN$. This will motivate our definition of the Lebesgue measure in higher dimensions.} If one wishes to work with complete measures, one can consider the completion of $\mu \times \nu$. In this setting, the relationship between measurabilit of a function on $X \times Y$ and measurability of its $x$-sections and $y$-sections is not so simple. However, Fubini-Tonelli is still valid when suitably reformulated. 
+
+\begin{theorem}[Fubini-Tonelli, complete measures]
+    Let $(X, \SM, \mu)$ and $(Y, \SN, \nu)$ be complete, $\sigma$-finite measure spaces, and let $(X \times Y, \SL, \lambda)$ be the completion of $(X \times Y, \SM \otimes \SN, \mu \times \nu)$. If $f$ is $\SL$-measurable and either (a) $f \geq 0$ or (b) $f \in L^1(\lambda)$, then $f_x$ is $\SN$-measurable for a.e. $x$ and $f^y$ is $\SM$-measurable for a.e. $y$, and in case (b) $f_x$ and $f^y$ are also integrable for a.e. $x$ and $y$. Moreover, $x \mapsto \int f_x \d \nu$ and $y \mapsto \int f^y \d \mu$ are measurable, and in case (b) also integrable, and \[\int f \d \lambda = \int \int f(x, y) \d \mu(x) \d \nu(y) = \int \int f(x, y) \d \nu(y) \d \mu(x).\]
+\end{theorem}
+
+\begin{proof}
+    \cite[Exercise~49]{folland1999real}.
+\end{proof}
+
+\subsection{Then $n$-Dimensional Lebesgue Integral}
+
+\begin{definition}
+    Let $(\R^n, \SL^n, m^n)$ denote the completion of the measure space $\left(\R^n, \SB_{\R^n}, m \times \cdots \times m\right)$\footnote{Equivalently, one can take the completion of $\left(\R^n, \SL^{\otimes n}, m \times \cdots \times m\right)$, where each m is taken as a measure over $\SB_\R$. It is sometimes easier to use the initial definition.}. We call this the $n$-dimensional Lebesgue measure. When there is no danger of confusion, we dispense with the superscript $n$, and usually write $\int f(x) \d x$ for $\int f \d m$. If $E = \prod_1^n E_j$ is a rectangle in $\R^n$, then we refer to a set $E_j$ as a side of $E$. 
+\end{definition}
+
+We now examine some regularity properties.
+
+\begin{theorem}\label{thm:2.40}
+    Let $E \in \SL^n$. Then \begin{enumerate}
+        \item $m(E) = \inf \{m(U) : U \supset E, U \ \text{open}\} = \sup \{m(K) : E \supset K, K \ \text{compact}\}$.
+        \item $E = A_1 \cup N_1 = A_2 \setminus N_2$, where $A_1$ is an $F_\sigma$, $A_2$ is a $G_\delta$ set, and $m(N_1) = m(N_2) = 0$.
+        \item If $m(E) < \infty$, then for any $\eps > 0$, there is a finite collection $\{R_j\}_1^N$ of disjoint rectangles whose sides are intervals such that $m(E \Delta \cup_1^N R_j) < \eps$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    See \citet[Theorem~2.40]{folland1999real}.
+\end{proof}
+
+\begin{theorem}\label{thm:2.41}
+    If $f \in L^1(m)$ and $\eps > 0$, there is a simple function $\phi = \sum_1^N a_j \chi_{R_j}$, where each $R_j$ is a product of intervals, such that $\int |f - \phi| < \eps$, and there is a continuous function $g$ that vanishes outside a bounded set such that $\int |f - g| < \eps$.
+\end{theorem}
+
+\begin{proof}
+    As in the proof of \cref{thm:2.26}, approximate $f$ by simple functions, then use \cref{thm:2.40} to approximate the latter by functions $\phi$ of the desired form. Finally, approximate such $\phi$'s by continuous functions by applying an obvious generalization of the argument in the proof of \cref{thm:2.26}.
+\end{proof}
+
+\begin{theorem}
+    The Lebesgue measure is translation-invariant. More precisely, for $a \in \R^n$, define $\tau_a : \R^n \to \R^n$ by $\tau_a(x) = x + a$. Then \begin{enumerate}
+        \item If $E \in \SL^n$, then $\tau_a(E) \in \SL^n$ and $m(\tau_a(E)) = m(E)$.
+        \item If $f : \R^n \to \C$ is Lebesgue measurable, then so is $f \circ \tau_a$. Moreover, if either $f \geq 0$ or $f \in L^1(m)$, then $\int (f \circ \tau_a) \d m = \int f \d m$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Since $\tau_a$ and the inverse $\tau_{-a}$ are continuous, they preserve the class of Borel sets. We may therefore compare the measures $m$ and $(m \circ \tau_a)$ over $\SB_{\R^n}$. For a rectangle $E$, the formula $m(\tau_a(E)) = m(E)$ follows from the one-dimensional result by definition of the product measure. It then follows for general Borel sets since $m$ is induced by a premeasure, and hence determimed by its action on rectangles. In particular, the collection of Borel sets $E$ such that $m(E) = 0$ is invariant under $\tau_\alpha$, and assertion (i) follows.
+
+    If $f$ is Lebesgue measurable and $B$ is a Borel set in $\C$, we have $f^{-1}(B) = E \cup N$, where $E$ is a Borel set and $m(N) = 0$. But $\tau_a^{-1}(E)$ is Borel and $m(\tau_a^{-1}(N)) = 0$, so $(f \circ \tau_a)^{-1}(B) \in \SL^n$, and $f \circ \tau_a$ is Lebesgue measurable. The equality $\int (f \circ \tau_a) \d \mu = \int f \d \mu$ reduces to the equality $m(\tau_{-a}(E)) = m(E)$ when $f = \chi_E$. It is then true for simple functions by linearity, and hence for nonnegative measurable functions by the definition of the integral. Taking positive and negative parts of real and imaginary parts then yields the result for $f \in L^1(m)$.
+\end{proof}
+
+Now recall that a linear transformation is invertible if and only if it has a decomposition into a composition of finitely many elementary linear transformations. We use this fact to establish the following theorem.
+
+\begin{theorem}\label{thm:2.44}
+    Suppose $T \in \on{GL}_n(\R)$. \begin{enumerate}
+        \item If $f : \R \to \C$ is Lebesgue measurable, then so is $f \circ T$. If $f \geq 0$ or $f \in L^1(m)$, then \begin{align*}
+            \int f \d x = |\det T| \int f \circ T \d x.
+        \end{align*}
+        \item If $E \in \SL^n$, then $T(E) \in \SL^n$ and $m(T(E)) = |\det T| \cdot m(E)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \dhcomment{To be added during review.}
+\end{proof}
+
+\begin{corollary}
+    The Lebesgue measure is invariant under rotations. That is, for a linear map $T$ satisfying $TT^* = I$, it holds that $m(T(E)) = m(E)$.\footnote{Here, $T^*$ denotes the transpose of $T$.}
+\end{corollary}
+
+We chance actually generalize this change of variables result beyond linear maps. Let $G = (g_1, \ldots, g_n)$ be a map from some open set $\Omega \subset \R^n$ into $\R^n$ whose components are all $C^1$; i.e. $g_j$ all have continuous first order partial derivatives. We denote by $D_x G$ the linear map defined by the matrix $\Big( ()\partial g_j / \partial x_j)(x) \Big)$ of partial derivatives at $x$. Observe that if $G$ is linear, then $D_x G = G$ for all $x$. $G$ is called a $C^1$ diffeomorphism if $G$ is injective and $D_x G$ is invertible for all $x \in \Omega$. In this case, the inverse function theorem guarantees that $G^{-1} : G(\Omega) \to \Omega$ is also a $C^1$ diffeomorphism and that $D_x(G^{-1}) = [D_{G^{-1}(x)}G]^{-1}$ for all $x \in G(\Omega)$.
+
+\begin{theorem}
+    Suppose that $\Omega$ is an open set in $\R^n$ and $G : \Omega \to \R^n$ is a $C^1$ diffeomorphism. \begin{enumerate}
+        \item If $f$ is a Lebesgue measurable function on $G(\Omega)$, then $f \circ G$ is Lebesgue measurable on $\Omega$. If $f \geq 0$, or $f \in L^1(G(\Omega), m)$, then \[\int_{G(\Omega)} f(x)\d x = \int_{\Omega} f \circ G(x) | \det D_x G| \d x.\]
+        \item If $E \subset \Omega$ and $E \in \SL^n$, then $G(E) \in \SL^n$ and $m(G(E)) = \int_E |\det D_x G| \d x$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    For those interested, be sure to have \href{https://sites.math.washington.edu//~folland/Homepage/oldreals.pdf}{Folland errata} handy.
+\end{proof}
+
+\subsection{Integration in Polar Coordinates}
+
+\dhcomment{Left to review.}
+
+\section{Signed Measures and Differentiation}
+
+Recall that for $f \in L^+$, we can define a new measure $\nu : A \mapsto \int_A f \d \mu$. Moreover, if $f \in L^1$, the measure is finite. In some sense, $\nu$ has density $f$ with respect to $\mu$. We would like to formalize this notion. 
+
+\subsection{Signed Measures}
+
+\begin{definition}
+    Let $(X, \SM)$ be a measurable space. A signed measure is a function $\nu : \SM \to [-\infty, \infty]$ such that \begin{enumerate}
+        \item $\nu(\emptyset) = 0$,
+        \item $\nu$ takes on at most one of the values of $\{\pm \infty\}$,
+        \item if $\{E_j\}$ is a countable disjoint sequence in $\SM$, then $\nu(\bigcup_j E_j) = \sum_j \nu(E_j)$, where the sum converges absolutely if $\nu(\bigcup_j E_j) < \infty$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Measures are signed measures. For emphasis, we often refer to measures as positive measures.
+\end{remark}
+
+\begin{example}
+    We have two examples.
+    \begin{enumerate}
+        \item Let $\mu$ and $\nu$ be measures such that one of $\mu$ or $\nu$ is finite. Them $\mu - \nu$ is a signed measure.
+        \item Let $f : X \to [-\infty,\infty]$ with at least one of $\int f^+ \d \mu < \infty$ or $\int f^- \d \mu < \infty$, in which case we call $f$ an extended $\mu$-integrable function. Then \[\nu(E) := \int_E f \d \mu\] is a signed measure.\footnote{Recall from our definitions that, even thought $f$ may not be integral, we defined the quantity $\int f \d\mu$ in more general case where at least one of $\int f^+ \d \mu < \infty$ or $\int f^- \d \mu < \infty$.} To see this, decompose $f$ into $f^+ - f^-$, so that \[\nu(E) = \nu^+(E) - \nu^{-}(E), \ \ \ \nu^+(E) = \int_E f^+\d\mu, \ \ \nu^{-}(E) = \int_E f^- \d \mu.\] 
+    \end{enumerate}
+    We will see that every signed measure takes on this general form.
+\end{example}
+ 
+\begin{proposition}
+    Let $\nu$ be a signed measure on $(X, \SM)$. If $\{E_j\} \subset \SM$ is an increasing sequence, then we have \[\nu\left(\bigcup_1^\infty E_j \right) = \lim_{j \to \infty} \nu(E_j),\] and if $\{F_j\} \subset \SM$ is a decreasing sequence and $\nu(E_1) < \infty$, then \[\nu\left(\bigcap_1^\infty E_j \right) = \lim_{j \to \infty} \nu(E_j).\]
+\end{proposition}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{definition}
+    Let $\nu$ be a signed measure on $(X, \SM)$. Then a set $E \in \SM$ is called positive (resp. negative, resp. null) for $\nu$ if \begin{align*}
+        \nu(F) &\geq 0 \ \ \ \text{for all} \ \ \ F \in \SM : F \subset E\\
+        \text{(resp.} \ \ \ &\leq 0 \ \ \ \text{for all} \ \ \ F \in \SM : F \subset E \text{)}\\
+        \text{(resp.} \ \ \ &= 0 \ \ \ \text{for all} \ \ \ F \in \SM : F \subset E \text{)}.
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+    Any measurable subset of a positive set is positive, and the union of any countable family of positive sets is positive. This statement continues to hold if we replace the word `positive' with `negative' or `null.'
+\end{lemma}
+
+\begin{proof}
+    The first statement follows directly from the definition of a positive set. Suppose a countable family $\{P_n\}$ of positive sets is given. Set \[Q_n := P_n \setminus \bigcup_{j < n} P_j \subset P_n, \ \ \text{for} \ \ n \geq 2, \ \  Q_1 = P_1.\] Since $Q_n \subset P_n$, $Q_n$ is positive. If $E \subset \bigcup_1^\infty P_j$, then \[\nu(E) = \nu\left(E \cap \left(\bigcup_1^\infty P_j\right)\right) = \sum_1^\infty \nu(E \cap Q_j) \geq 0.\]
+\end{proof}
+
+\begin{lemma}[Hahn decomposition]\label{lem:hahn}
+    If $\nu$ is a signed measure on $(X, \SM)$, then there exists a positive set $P$ and a negative set $N$ for $\nu$ such that $P \cup N = X$ and $P \cap N = \emptyset$. If $P', N'$ is another pair satisfying this property, then $P \Delta P'$, $N \Delta N'$ are null for $\nu$.
+\end{lemma}
+
+\begin{proof}
+    W.l.o.g., we may assume that $\nu$ does not assume $+\infty$. Otherwise consider $-\nu$. Let \[\CP = \{E \in \SM : E \ \text{positive for} \ \nu\}, \ \ \ m = \sup_{E \in \CP} \nu(E).\] Now let $\{P_j\}$ be a maximizing sequence such that $\nu(P_j) \to m$ as $j \to \infty$. Then by our lemma, $P = \bigcup_j P_j$ is also positive, and by the lemma before that, $\nu(P) = m < \infty$.
+
+    We now claim that $N := X \setminus P$ is negative. Suppose not. So there is a subset $Q \in \SM$, $Q \subset N$ such that $\nu(Q) > 0$. \textbf{Case 1.} Suppose there is a subset $Q$ of strictly positive measure. Then $P \sqcup Q$ is positive, with measure greater than $P$. This is a contradiction. \textbf{Case 2.} Suppose no such $Q$ exists. So we have a subset $Q$ of postive measure, and there is a subset $C \in \SM$, $C \subset Q$ such that $\nu(C) < 0$. Therefore, if we set $B = Q \setminus C$, we have \[\nu(B) = \nu(Q) - \nu(C) > \nu(Q).\] So we have found a subset of $Q$ with measure greater than $Q$. Let $n_1$ be the smallest integer such that there exists a $B \subset N$ with $\nu(B) > 
+    1/n_1$, and let $A_1$ be such a set. Inductively, let $n_j$ be the smallest integer such that there exists some $B \subset A_{j-1}$ with $\nu(B) > \nu(A_{j-1}) + 1/n_j$, and let $A_j$ be such a set. By the Axiom of Dependent Choice, there is a denumerable sequence $\{A_j\}_1^\infty$ satisfying the relation for all $j$. 
+    
+    Take $A = \bigcap_j A_j$. Now, \[\infty > \nu(A) = \lim_{j \to \infty} \nu(A_j) > \sum_j 1/n_j.\] So $n_j \to \infty$ as $j \to \infty$. There is some $B \subset A$ such that $\nu(B) > \nu(A) + 1/n$ for some $n \in \N$. For sufficiently large $j$, we have $n < n_j$ and $B \subset A \subset A_{j-1}$ by definition. This contradicts the construction of $n_j$ and $A_j$, however. So $N$ must be negative.
+
+    Now, if we have another pair $P', N'$, note that $P \setminus P' \subset P$ and and $P \setminus P' \subset N'$, so $P \setminus P'$ is both positive and negative. Similarly, we can show that $P' \setminus P$ is null. Hence, $P \Delta P'$ is null. A similar argument works for $N \Delta N'$.
+\end{proof}
+
+\begin{definition}
+    Let $(X, \SM)$ be a measururable space with signed measure $\nu$.
+    The decomoposition $X = P \cup N$ for $P, N$ taken from \cref{lem:hahn} is called a Hahn decomposition for $\nu$. Such decompositions are not unique, but as we will see, they furnish a unique representation of $\nu$ by two positive measures.
+\end{definition}
+
+\begin{definition}
+    We say that two signed measures $\mu$ and $\nu$ on $(X, \SM)$ are mutually singular and write $\mu \perp \nu$ if there exists $E, F \in \SM$ such that $E \cap F = \emptyset$, $E \cup F = X$, $E$ is null for $\mu$, and $F$ is null for $\nu$. 
+\end{definition}
+
+\begin{theorem}[Jordan decomposition]\label{thm:jordan-decomposition}
+    If $\nu$ is a signed measure, then there exist unique positive measures $\nu^+,\nu^-$ such that $\nu = \nu^+ - \nu^-$ and $\nu^+ \perp \nu^-$.
+\end{theorem}
+
+\begin{proof}
+    We can write a Hahn decomposition $X = P \cup N$. Now for any measurable set $A \in \SM$, define \[\nu^+(A) = \nu(A \cap P), \ \ \ \nu^-(A) = -\nu(A \cap N).\] Now, notice that $\nu = \nu^+ - \nu^-$, and $\nu^+ \perp \nu^-$. 
+
+    To see uniqueness, let $\nu = \mu^+ - \mu^-$ be another decomposition into positive measures such that $\mu^+ \perp \mu^-$. Let $E, F \in \SM$ such that $E \cap F = \emptyset$, $E \cup F = X$, and $\mu^+(F) = \mu^-(E) = 0$. Since $\mu^+$ and $\mu^-$ are positive measures, it follows that $E, F$ is a Hahn decomposition for $\nu$. Hence, $P \Delta E$ is null for $\nu$, and for any $A \in \SM$, we have \[\mu^+(A) = \mu^+(A \cap E) = \nu(A \cap E) = \nu(A \cap P) = \nu^+(A).\] Likewise, $\nu^- = \mu^-$.
+\end{proof}
+
+\begin{definition}
+    We call $\nu = \nu^+ - \nu^-$ from \cref{thm:jordan-decomposition} the Jordan decomposition of $\nu$, and $\nu^+, \nu^-$ the positive and negative variations of $\nu$. We define $|\nu| = \nu^+ + \nu^-$ to be the total variation of $\nu$. 
+\end{definition}
+
+\begin{example}
+    If $\nu(E) = \int_E f \d m$, then \[\nu^+(E) = \int_E f^+ \d m, \ \ \ \nu^-(E) = \int_E f^- \d m, \ \ \ |\nu|(E) = \int_E |f| \d m.\]
+\end{example}
+
+\begin{remark}
+    \begin{enumerate}
+        \item $E \in \SM$ is $\nu$-null if and only if $|\nu|(E) = 0$.
+        \item $\nu \perp \mu \iff |\nu| \perp \mu \iff \nu^+ \perp \mu \ \ \text{and} \ \ \nu^- \perp \mu$.
+        \item If $\nu$ omits $\infty$, then $\nu^+(X) = \nu(P) < \infty$, so $\nu^+$ is a finite measure. An analogous statement about $\nu^-$ is true when $\nu$ omits $-\infty$. Similarly, if the range of $\nu$ is contained in $\R$, then $\nu$ is bounded.
+        \item Let $\nu(E) = \int_E f \d \mu$ where $\mu = |\nu|$, $f = \chi_P - \chi_N$, for Hahn decomposition $X = P \cup N$ for $\nu$. We have \begin{align*}
+            \int_E f \d \mu &= \int_E \chi_P - \chi_N \d \mu  = |\nu|(P \cap E) - |\nu|(N \cap E) \\&= \nu^+(P \cap E) - \nu^-(N \cap E) = \nu^+(E) - \nu^-(E) = \nu(E).
+        \end{align*}
+        In other words, we can always write $\nu$ in the form of an integral, as proposed above.
+        \item We call a signed meaure $\nu$ finite (resp. $\sigma$-finite) if $|\nu|$ is finite (resp. $\sigma$-finite).
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    We define integration with respect to a signed measure as follows. If $f \in L^1(\mu^+)$ or $f \in L^1(\mu^-)$, then \[\int f \d \nu := \int f \d \nu^+ - \int f \d \nu^-.\] Moreover, we define\footnote{As before, the object $\int f \d \nu$ exists even when $f \notin L^1(\nu)$.} \[L^1(\nu) := L^1(\nu^+) \cap L^1(\nu^-).\]
+\end{definition}
+
+\subsection{The Lebesgue-Radon-Nikodym Theorem}
+
+\begin{definition}
+    Let $\nu$ be a signed measure on $(X, \SM)$ and $\mu$ be a positive measure on $(X, \SM)$. We say that $\nu$ is absolutely continuous with respect to $\mu$ and write $\nu \ll \mu$ if $\nu(E) = 0$ for all $E \in \SM$ where $\mu(E) = 0$.
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}
+        \item One can verify that $\nu \ll \mu$ holds if and only if $|\nu| \ll \mu$ if and only if $\nu^+ \ll \mu$ and $\nu^- \ll \mu$ (Homework).
+        \item Aboslute continuity and mutual singularity are essentially the direct `opposite cases.' Indeed, if $\nu \perp \mu$ and $\nu \ll \mu$, then $\nu = 0$. 
+        To see this, note that $\nu \perp \mu$ implies $|\nu| \perp \mu$. Let $E, F \in \SM$ such that $E \sqcup F = X$, $E$ is null for $\mu$ and $F$ is null for $|\nu|$. We have $\mu(E) = |\nu|(F) = 0$, and since $|\nu| \ll \mu$, $|\nu|(E) = 0$. Hence, $|\nu| = 0$ and $\nu = 0$.
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}
+    Let $\nu$ be a finite signed measure and $\mu$ be a positive measure on $(X, \SM)$. Then $\nu \ll \mu$ if and only if $\forall \eps > 0$, $\exists \delta > 0$ such that $|\nu(E)| < \eps$ whenever $\mu(E) < \delta$.
+\end{theorem}
+
+\begin{proof}
+    ($\implies$) The first direction is clear. If $\mu(E) = 0$, then for any $\delta > 0$, $\mu(E) < \delta$. Hence, $|\nu(E)| < \eps$ for all $eps > 0$, and $\nu(E) = 0$.
+
+    ($\impliedby$) Now suppose $\nu \ll \mu$, so $|\nu| \ll \mu$. Since $|\nu(E)| \leq |\nu|(E)$ for any set $E$, it suffices to show the $\eps$-$\delta$ property for $|\nu|$. Suppose this does not hold; there exists $\eps > 0$ such that for all $n \in \N$, there exists $E_n \in \SM$ such that \[\mu(E_n) < 2^{-n}, \ \ \ \text{but} \ \ \ |\nu|(E_n) \geq \eps.\] Let $F_k = \bigcup_k^\infty E_n$ and $F = \bigcap_1^\infty F_k$. We have \[\mu(F_k) < \sum_k^\infty 2^{-n} = 2^{1-k}, \ \ \ \text{so} \ \ \ \mu(F) = 0.\] By finiteness of $\nu$, however, \[|\nu|(F) = \lim_{n \to \infty} |\nu|(F_k) \geq \eps.\] In particular, $|\nu| \not\ll \mu$, and we have a contradiction.
+\end{proof}
+
+If $\mu$ is a measure and $f$ is an extended $\mu$-integrable function, the signed measure $\nu$ defined by $\nu(E) = \int_E f \d \mu$ is clearly absolutely continuous with respect to $\mu$; it is finite if and only if $f \in L^1(\mu)$. For any complex-valued $f \in L^1(\mu)$, the preceding theorem can be applied to $\Re f$ and $\Im f$, and we obtain the following useful result.
+
+\begin{corollary}
+    If $f \in L^1(\mu)$, then for every $\eps > 0$ there exists $\delta > 0$ such that $\left|\int_E f \d \mu\right| < \eps$ whenever $\mu(E) < \delta$.
+\end{corollary}
+
+We introduce some notionation: \[\text{We write} \ \ \ \d \nu = f \d \nu \ \ \ \text{to mean that} \ \ \ \nu(E) = \int_E f \d \mu \ \forall E \in \SM.\] This is saying that the integrals over all sets in $\SM$. Sometimes, in a slight abuse of language, we shall refer to ``the signed measure $f \d \mu$.'' We now come to the main theorem of this section, which gives a complete picture of the structure of signed measures relative to a given positive measure. First, a technical lemma.
+
+\begin{lemma}\label{lem:radon-nikodym-technical}
+    Suppose that $\nu$ and $\mu$ are finite measures on $(X, \SM)$. Either $\nu \perp \mu$, or there exists some $\eps > 0$ and $E \in \SM$ such that $\mu(E) > 0$ and $\nu \geq \eps \mu$ on $E$ (that is, $E$ is a positive set for $\nu - \eps \mu$).
+\end{lemma}
+
+\begin{proof}
+    Let $X = P_n \cup N_n$ be a Hahn decomposition for $\nu - n^{-1}\mu$, and let $P = \bigcup_1^\infty P_n$ and $N = \bigcap_1^\infty N_n = P^c$. Then $N$ is a negative set for $\nu - n^{-1}\mu$ for all $n$; i.e., $0 \leq \nu(N) \leq n^{-1}\mu(N)$ for all $n$, so $\nu(N) = 0$. If $\mu(P) = 0$, then $\nu \perp \mu$. If $\mu(P) > 0$, then $\mu(P_n) > 0$ for some $n$, and $P_n$ is a positive set for $\nu - n^{-1}\mu$.
+\end{proof}
+
+\begin{theorem}[Lebesgue-Radon-Nikodym]\label{thm:radon-nikodym}
+    Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ a $\sigma$-finite positive measure on $(X, \SM)$. There exist unique $\sigma$-finite signed measures $\lambda$, $\rho$ such that \[\lambda \perp \mu, \ \ \ \rho \ll \mu, \ \ \ \nu = \lambda + \rho.\] Moreover, there is an extended $\mu$-integrable function $f : X \to \R$ such that $\d \rho = f \d \mu$, and any two such functions are equal $\mu$-a.e.
+\end{theorem}
+
+\begin{proof}
+    \textbf{Case 1.} Suppose that $\nu$ and $\mu$ are finite positive measures. We start by proving that there are unique finite postive measures $\lambda, \rho$ satisfying the desired properties. Let \[\CF = \left\{f : X \to [0,\infty] : \int_E f \d \mu \leq \nu(E) \ \ \forall E \in \SM\right\},\] which is nonempty since it contains $0$. Also, if $f, g \in \CF$, then $h = \max(f, g) \in \CF$, for if we let $A = \{x : f(x) > g(x)\}$, then for any $E \in \SM$ we have \[\int_E h \d \mu = \int_{E \cap A} f \d \mu + \int_{E \setminus A}g \d \mu \leq \nu(E \cap A) + \nu(E \setminus A) = \nu(E).\] Now let $a = \sup\{\int f \d \mu : f \in \CF\}$, noting that $a \leq \nu(X) < \infty$, and choose a sequence $\{f_n\} \in \CF$ such that $\int f_n \d \mu \to a$. Let $g_n = \max(f_1, \ldots, f_n)$ and $f = \sup_n f_n$. Then $g_n \in \CF$, $g_n$ increases pointwise to $f$, and $\int g_n \d \mu \geq f_n \d \mu$. It follows $\lim \int f_n \d \mu = a$ and by MCT, $f \in \CF$ and $\int f \d \mu = a$. In particular, $f < \infty$ a.e., so we may take $f$ to be $\R$-valued everywhere.
+
+    We now claim that the measure $\d \lambda = \d \nu - f \d \nu$ (which is positive since $f \in \CF$) is singular with respect to $\mu$. If not, then by \cref{lem:radon-nikodym-technical}, then there exists some $\eps > 0$ and $E \in \SM$ such that $\mu(E) > 0$ and $\lambda \geq \eps\mu$ on $E$. But then $\eps \d \mu \leq \d \lambda = \d\nu - f \d\mu$; that is, $(f + \eps \chi_E) \d \mu \leq \d\nu$, so $f + \eps \chi_E \in \CF$ and \[\int (f + \eps \chi_E) \d \mu = a + \eps \mu(E) > a,\] contradicting the definition of $a$.
+
+    Thus, the existence of measures$\lambda$, $f$, and $\d \rho := f \d \mu$ is proved. As for uniqueness, if it also holds that $\d \nu = \d \lambda' + f' \d \mu$ for finite positive measures $\lambda'$ and $f' \d \mu$, we have $\d\lambda - \d \lambda' = (f' - f)\d \mu$. But $\lambda - \lambda' \perp \mu$, and $(f' - f)\d \mu \ll \d \mu$ (generalization of Exercise 9). Hence, $\d \lambda - \d \lambda' = (f - f')\d \mu = 0$, so $\lambda = \lambda'$ and $f = f'$ $\mu$-a.e. by \cref{prop:integrable-functions-equal-ae}. That is, $\lambda$ and $\rho$ are the unique finite positive measures satisfying our desired properties.
+
+    \textbf{Case 2.} Suppose that $\nu$ and $\mu$ are $\sigma$-finite positive measures. Then $X$ is a countable dijoint union of $\mu$-finite sets and a countable disjoint union of $\nu$-finite sets; by taking intersections of these, we obtain a disjoint sequence $\{A_j\} \subset \SM$ such that $\mu(A_j), \nu(A_j) < \infty$ for all $j$, and $X = \bigcup_1^\infty A_j$. Define $\mu_j(E) = \mu(E \cap A_j)$ and $\nu_j(E) = \nu(E \cap A_j)$. By the reasoning above, for each $j$, we have $\d\nu_j = \d\lambda_j + f_j\d\mu_j$ where $\lambda_j \perp \mu_j$. Since $\mu_j(A_j^c) = \nu_j(A_j^c) = 0$, we have $\lambda_j(A_j^c) = \nu_j(A_j^c) - \int_{A_j^c}f_j \d \mu_j = 0$, and we may assume that $f_j = 0$ on $A_j^c$. Let $\lambda = \sum_1^\infty \lambda_j$ and $f = \sum_1^\infty f_j$. Then one can verify that $\d \nu = \d\lambda + f \d\mu$, and $\lambda \perp \mu$ (again, Exercise 9). Moreover, since each $\d \lambda_j$ is finite, and each $f_j \d \mu$ is finite, so $\d\lambda$ and $f \d \mu$ are $\sigma$-finite. Uniqueness follows as before, now taking care of $\sigma$-finiteness. \textbf{General case.} If $\nu$ is a signed measure (that is not necessarily positive), we apply the preceding argument to $\nu^+$ and $\nu^-$, then subtract the results.
+\end{proof}
+
+\begin{definition}
+    Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ be a $\sigma$-finite postive measure on $(X, \SM)$. From \cref{thm:radon-nikodym}, we have a decomposition $\nu = \lambda + \rho$ where $\lambda \perp \mu$ and $\rho \ll \mu$. This is called the Lebesgue decomposition of $\nu$ with respect to $\mu$.
+\end{definition}
+
+\begin{remark}
+    \begin{itemize}
+        \item In the case where $\nu \ll \mu$, \cref{thm:radon-nikodym} says that $\d \nu = f \d \mu$ for some extended $\mu$-integrable $f : X \to \R$. This result is usually known as the Radon-Nikodym theorem, and $f$ is called the Radon-Nikodym derivative of $\nu$ with respect to $\mu$. It is standard to denote it by $f = \d\nu / \d\mu$. We therefore often write \[\d \nu = \frac{\d\nu}{\d\mu}{\d \mu}.\] Strictly speaking, $\d\nu / \d\mu$ should be constructed as the class of functions equal to $f$ $\mu$-a.e. 
+        \item The formulas suggested by $\d\nu/\d\mu$ are generally correct. For example, in the case where $\nu_1, \nu_2$ are signed measures such that $\nu_1, \nu_2 \ll \mu$, and $\nu_1 + \nu_2$ is a signed measure,\footnote{This allows us to avoid cases where $\nu_1(E) = \infty, \nu_2(E) = - \infty$.} one can see that \dhcomment{This is not totally clear. In the case where $\nu_1(E) + \nu_2(E) < \infty$, it is trivial. In the case where a positive component is $\infty$ but another is not, can we show that we still have equality?} \[\d(\nu_1 + \nu_2) / \d \mu = (\d\nu_1/\d\mu) + (\d\nu_2/\d\mu).\] In the case where both the positive and negative integrals are finite, we may invoke our usual result; in the case where one is infinite, we still have equality.
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}[Chain rule]\label{prop:chain-rule}
+    Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu$, $\lambda$ are $\sigma$-finite positive measures on $(X, \SM)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$. \begin{enumerate}
+        \item If $g \in L^1(\nu)$, then $g \cdot (\d\nu/\d\mu) \in L^1(\mu)$ and \[\int g \d \nu = \int g \frac{\d \nu}{\d\mu}\d\mu.\]
+        \item We have $\nu \ll \lambda$, and \[\frac{\d\nu}{\d\lambda} = \frac{\d\nu}{\d\mu} \frac{\d\mu}{\d\lambda} \ \ \lambda\text{-a.e.}\]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \dhcomment{Proof is unsatisfactory. Come back.}
+    % By considering $\nu^+$ and $\nu^-$ separately, we may assume that $\nu \geq 0$. Moreover, since $\mu$ is positive, The equation \[\int g \d \nu = \int g \frac{\d \nu}{\d\mu}\d\mu\] is true when $g = \chi_E$ by definition of $\d\nu/\d\mu$. SinceIt is therefore true for simple functions by linearity,\footnote{Here, we can make use of the fact that the combined integrals are all finite.} then for nonnegative integrable functions by the monotone convergence theorem, and finally for functions in $L^1(\mu)$ by linearity again. Replacing $\nu$, $\mu$ by $\mu$, $\lambda$, and setting $g = \chi_E(\d\nu/\d\mu)$, we obtain \[\nu(E) = \int_E \frac{\d\nu}{\d\mu}\d\mu = \int_E \frac{\d\nu}{\d\mu} \frac{\d\mu}{\d\lambda} \d \lambda,\] for all $E \in \SM$. Hence, by \cref{prop:integrable-functions-equal-ae}, \[\frac{\d\nu}{\d\mu} = \frac{\d\nu}{\d\mu} \frac{\d\mu}{\d\lambda} \ \ \ \lambda\text{-a.e.}.\]
+\end{proof}
+
+\noindent The following corollary can be seen as a variant of the inverse function theorem.
+
+\begin{corollary}
+    Let $\mu, \lambda$ be positive measures, $\mu \ll \lambda$ and $\lambda \ll \mu$. Then $(\d\lambda/\d\mu)(\d\mu/\d\lambda) = 1$ a.e. (with respect to either $\lambda$ or $\mu$).
+\end{corollary}
+
+\begin{example}
+    An anti-example. Let $\mu$ be the Lebesgue measure and $\nu$ the point mass at 0 in $(\R, \SB_\R)$. Clearly, $\nu \perp \mu$. The Radon-Nikodym derivative does not exist, but the theory of distributions allows us to think about this (currently vague) idea. Using this theory, one finds that the ``derivative'' of $\nu$, if it existed, would be the Diract $\delta$-function.
+\end{example}
+
+We conclude this section with a simple but important observation. 
+
+\begin{proposition}\label{prop:3.11}
+    If $\mu_i$ for $i \in [n]$ are positive measures on $(X, \SM)$, then there is a measure $\mu$ such that $\mu_j \ll \mu$ for all $j$. In particular, $\mu = \sum_1^n \mu_j$.
+\end{proposition}
+
+\begin{remark}
+    More generally, we can compare $\mu_1, \ldots, \mu_n$ by comparing their densities $f_1, \ldots, f_n \in L^+(\mu)$, going through the Lebesgue-Radon-Nikodym theorem.
+\end{remark}
+
+\subsection{Complex Measures}
+
+\begin{definition}
+    A complex measure on a measurable space $(X, \SM)$ is a map $\nu : \SM \to \C$ such that \begin{enumerate}
+        \item $\nu(\emptyset) = 0$;
+        \item it $\{E_j\}$ is a countable sequence of disjoint sets in $\SM$, then $\nu(\bigcup_1^\infty E_j) = \sum_1^\infty \nu(E_j)$, where the series converges absolutely.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}
+        \item In particular, infinite values are not allowed, so a positive measure is a complex measure if and only if it is finite. 
+        \item For example, if $\mu$ is a positive measure and $f \in L^1(\mu)$, then $f \d \mu$ is a complex measure.
+        \item If $\nu$ is a complex measure, we shall write $\nu_r$ and $\nu_i$ for the real and imaginary parts of $\nu$. Thus $\nu_r$ and $\nu_i$ are signed measures that do not assume values $\pm \infty$; hence they are finite, and the range of $\nu$ is a bounded subset of $\C$.
+    \end{enumerate}
+\end{remark}
+
+The notions we have developed for signed measures generalize easily to complex measures. For example, we define $L^1(\nu)$ to be $L^1(\nu_r) \cap L^1(\nu_i)$, and for $f \in L^1(\nu)$, we set $\int f \d \nu = \int f \d\nu_r + i \int f \d\nu_i$. If $\nu$ and $\mu$ are complex measures, we say that $\nu \perp \mu$ if $\nu_a \perp \nu_b$ for $a, b = r, i$. If $\lambda$ is a positive measure, we say that $\nu \ll \lambda$ if $\nu_r \ll \lambda$ and $\nu_i \ll \lambda$. The theorems of the previous section generalize; one merely has to apply them separately to real and imaginary parts, whose positive and negative parts are necessarily finite.
+
+\begin{theorem}[Lebesgue-Radon-Nikodym]\label{thm:complex-radon-nikodym}
+    If $\nu$ is a complex measure and $\mu$ is a $\sigma$-finite positive measure on $(X, \SM)$, there exists a complex measure $\lambda$ and a function $f \in L^1(\mu)$ such that $\lambda \perp \mu$ and $\d\nu = \d\lambda + f \d\mu$. If also $\lambda' \perp \mu$ and $\d\nu = \d\lambda' + f'\d\mu$, then $\lambda = \lambda'$ and $f = f'$ $\mu$-a.e.
+\end{theorem}
+
+\noindent As before, if $\nu \ll \mu$, we denote the $f$ in \cref{thm:complex-radon-nikodym} by $\d\nu / \d\mu$.
+
+\begin{definition}
+    The total variation of a complex measure $\nu$ is the positive measure $|\nu|$ determined by the property that if $\d\nu = f\d\mu$ where $\mu$ is a positive measure, then $\d|\nu| := |f|\d\mu$. 
+\end{definition}
+
+\begin{proof}[Total variation is well-defined]
+    To see this, we first observe that every $\nu$ is of the form $f \d\mu$ for some finite measure $\mu$ and some $f \in L^1(\mu)$; indeed, we can take $\mu = |\nu_r| + |\nu_i|$ and use \cref{thm:complex-radon-nikodym} to obtain $f$. Second, if $\d\nu = f_1\d\mu_1 = f_2\d\mu_2$, let $rho = \mu_1 + \mu_2$. Then by \cref{prop:chain-rule}, we have \[f_1 \frac{\d\mu_1}{\d\rho}\d\rho = \d\nu = f_2 \frac{\d\mu_2}{\d\rho}\d\rho,\] so that $f_1(\d\mu_1/\d\rho) = f_2(\d\mu_2/\d\rho)$ $\rho$-a.e. Since $\mu_1, \mu_2$ are positive measures, $\d\mu_j / \d\rho$ is nonnegative (see proof of \cref{thm:radon-nikodym}), and we have \[|f_1| \frac{\d\mu_1}{\d\rho} = \left|f_1 \frac{\d\mu_1}{\d\rho} \right| = \left|f_2 \frac{\d\mu_2}{\d\rho}\right| = |f_2|\frac{\d\mu_2}{\d\rho} \ \ \rho\text{-a.e.},\] and thus \[|f_1|\d\mu_1 = |f_1|\frac{\d\mu_1}{\d\rho}\d\rho = |f_2|\frac{\d\mu_2}{\d\rho}\d\rho = |f_2|\d\mu_2.\] Hence, the definition of $|\nu|$ is independent of the choice of $\mu$ and $f$. This definition agrees with our previous definition when $\nu$ is a signed measure, for in that case $\d\nu = (\chi_P - \chi_N)\d|\nu|$ where $X = P \cup N$ is a Hahn decomposition, and $|\chi_P - \chi_N| = 1$.
+\end{proof}
+
+\begin{proposition}
+    Let $\nu$ be a complex measure on $(X, \SM)$. \begin{enumerate}
+        \item $|\nu(E)| \leq |\nu|(E)$ for all $E \in \SM$;
+        \item $\nu \ll |\nu|$, and $\d\nu / \d|\nu|$ has absolute value 1 $|\nu|$-a.e.;
+        \item $L^1(\nu) = L^1(|\nu|)$, and if $f \in L^1(\nu)$, then $|\int f \d\nu| \leq \int |f|\d|\nu|$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Supppose $\d\nu = f\d\mu$ as in the definition of $|\nu|$. Then, \[|\nu(E) = \left|\int_E f \d\mu \right| \leq \int_E |f| \d\mu = |\nu|(E).\] This proves parti (a) and shows that $\nu \ll |\nu|$. If $g = \d\nu / \d|\nu|$, then we have $f \d\mu = \d\nu = g \d|\nu| = g |f| \d\mu$, so $g|f| = f$ $\mu$-a.e. and hence $|\nu|$-a.e. But clearly $|f| > 0$ $|\nu|$-a.e. by definition of $|\nu|$, so $|g| = 1$ $|\nu|$-a.e. Part (c) is left to Exercise 18. \dhcomment{To-do.}
+\end{proof}
+
+\begin{proposition}
+    If $\nu_1$, $\nu_2$ are complex measures on $(X, \SM)$, then $|\nu_1 + \nu_2| \leq |\nu_1| + |\nu_2|$.\footnote{Note that here the vertical bars do not mean absolute value. Looking ahead, when we do mean absolute value, we will be sure to make this clear.}
+\end{proposition}
+
+\begin{proof}
+    By \cref{prop:3.11}, we can write $\nu_j = f_j \d\mu$, with the same $\mu$, for $j \in \{1, 2\}$. Note that the sum of complex measures is a complex measure, and $\d(\nu_1 + \nu_2) = (f_1 + f_2)\d\mu$. But then \[\d|\nu_1 + \nu_2| = |f_1 + f_2|\d\mu \leq |f_1|\d\mu + |f_2|\d\mu = \d|\nu_1| + \d|\nu_2|.\]
+\end{proof}
+
+\subsection{Differentiation on Euclidean Space}
+
+In this section, we examine the Radon-Nikodym derivative of a signed or complex measure in the special case where $(X, \SM) = (\R^n, \SB_\R)$ and $\mu = m$ is the Lebesgue measure. Here, one can define the pointwise derivative of $\nu$ with respect to $m$ in the following way. Let $B(r, x)$ be the open ball of radius $r$ about $x$ in $\R^n$; consider the limit \[F(x) = \lim_{r \to 0} \frac{\nu(B(r, x))}{m(B(r,x))}\] when it exists. If $\nu \ll m$, so that $\d\nu = f\d m$, then $\nu(B(r, x))/m(B(r, x))$ is simply the average value of $f$ on $B(r, x)$, so one would hope that $F = f$ $m$-a.e. This will turn out to be the case when $\nu(B(r, x))$ is finite for all $r, x$. 
+
+For the remainder of this section, terms such as ``integrable'' and ``almost everywhere'' refer to the Lebesgue measure unless otherwise stated. We begin with a technical lemma.
+
+\begin{lemma}[Vitali Covering Lemma]
+    Let $\CC$ be a collection of open balls in $\R^n$, and let $U = \bigcup_{B \in \CC} B$. If $c < m(U)$, there exist disjoint $B_1, \ldots, B_k \in \CC$ such that $\sum_1^k m(B_j) > 3^{-n}c$.
+\end{lemma}
+
+\begin{proof}
+    If $c < m(U)$, there is a compact $K \subset U$ with $m(K) > c$, and finitely many balls $A_1, \ldots, A_m$ that cover $K$. Let $B_1$ be the largest of the $A_j$'s (that is, choose $B_1$ to have maximal radius, breaking ties arbitrarily), let $B_2$ be the largest of the $A_j$'s that are disjoint from $B_1$, $B_3$ be the largest of the $A_j$'s that are disjoint from $B_1$ and $B_2$, and so on until the list of $A_j$'s is exhausted. According to this construction, if $A_i$ is not one of the $B_j$'s, there is a $j$ such that $A_j 
+    \cap B_j \neq \emptyset$, and if $j$ is the smallest integer with this property, the radius of $A_i$ is at most that of $B_j$. Hence $A_i \subset B_j^*$, where $B_j^*$ is the ball concentric with $B_j$ whose radius is three times that of $B_j$. But then $K \subset \bigcup_1^k B_j^*$, so \[c < m(K) \leq \sum_1^k m(B_j^*) = 2^n \sum_1^k m(B_j).\]
+\end{proof}
+
+\begin{definition}
+    A measurable function $f : \R^n \to \C$ is called locally integrable (with respect to the Lebesgue measure) if $\int_K |f(x)|\d x < \infty$ for every bounded measurable set $K \subset \R^n$. We denote the space of locally integrable functions by $L_{\on{loc}}^1$. If $f \in L_{\on{loc}}^1$, $x \in \R^n$, and $r > 0$, we define $A_r f(x)$ to be the average value of $f$ on $B(r, x)$: \[A_r f(x) = \frac{1}{m(B(r, x))} \int_{B(r, x)} f(y) \d y.\]
+\end{definition}
+
+\begin{lemma}
+    If $f \in L_{\on{loc}}^1$, then $A_r f(x)$ is jointly continuous in $r$ and $x$ ($r > 0$, $x \in \R^n$).
+\end{lemma}
+
+\begin{proof}
+    From the results in Folland's section on Polar integration \dhcomment{to be added}, we know that $m(B(r, x)) = cr^n$ where $c = m(B(1, 0))$, and $m(S(r, x)) = 0$ where $S(r, x) = \{y : |y-x| = r\}$. Moreover, as $r \to r_0$ and $x \to x_0$, it holds that $\chi_{B(r, x)} \to \chi_{B(r_0, x_0)}$ pointwise on $\R^n \setminus S(r_0, x_0)$. Hence, $\chi_{B(r, x)} \to \chi_{B(r_0, x_0)}$ a.e., and $|\chi_{B(r, x)}| \leq \chi_{B(r+0 + 1, x_0)}$ if $r < r_0 + 1/2$ and $|x-x_0| < 1/2$. By DCT, it follows that $\int_{B(r, x)}f(y)\d y$ is continuous in $r$ and $x$, and hence so is $A_r f(x) = c^{-1}r^{-n} \int_{B(r, x)} f(y) \d y$.
+\end{proof}
+
+\begin{definition}
+    For $f \in L_{\on{loc}}^1$, we define the Hardy-Littlewood maximal function $Hf$ by \[Hf(x) = \sup_{r > 0} A_r |f|(x) = \sup_{r > 0} \left( \frac{1}{m(B(r, x))} \int_{B(r, x)} |f(y)|\d y \right).\]
+\end{definition}
+
+\noindent Note that $Hf$ is measurable, as $(Hf)^{-1}((a, \infty)) = \bigcup_{r > 0} (A_r|f|)^{-1}((a, \infty))$ is open for any $a \in \R$, by the lemma above.
+
+\begin{theorem}[Maximal Theorem]
+    There is a constant $C > 0$ such that for all $f \in L^1$ and $\alpha > 0$, \[m(\{x : Hf(x) > \alpha\}) \leq \frac{C}{\alpha} \int |f(x)| \d x.\]
+\end{theorem}
+
+\begin{proof}
+    Let $E_\alpha = \{x : Hf(x) > \alpha\}$. For each $x \in E_\alpha$ we can choose $r_x > 0$ such that $A_{r_x}|f|(x) > \alpha$. The balls $B(r_x, x)$ cover $E_\alpha$, so by Vitali Covering Lemma, if $c < m(E_\alpha)$, there exist $x_1, \ldots, x_k \in E_\alpha$ such that the balls $B_j = B(r_{x_j}, x_j)$ are disjoint and $\sum_1^k m(B_j) > 3^{-n} c$. But then \[c < 3^{-n} \sum_1^k m(B_j) \leq \frac{3^n}{\alpha} \sum_1^k \int_{B_j} |f(y)|\d y \leq \frac{3^n}{\alpha} \int_{\R^n} |f(y)|\d y,\] where the second inequality follows from manipulating the definition of $A_{r_x}|f|(x)$. Letting $c \to m(E_\alpha)$, we obtain the desired result.
+\end{proof}
+
+\subsubsection{The Fundamental Differentiation Theorem}
+
+With the tools above in hand, we now present three successively sharper versions of the fundamental differentiation theorem. In the proofs, we shall use the notion of limit superior for real-valued functions of a real variable, \[\limsup_{r \to R} \phi(r) = \lim_{\eps \to 0} \sup_{0 < |r - R| < \eps} \phi(r) = \inf_{\eps > 0} \sup_{0 < |r - R| < \eps} \phi(r),\] and the easily verified fact that \[\lim_{r \to R} \phi(r) = c \ \ \ \ \iff \ \ \ \ \limsup_{r \to R} |\phi(r) - c| = 0.\]
+
+\begin{theorem}
+    If $f \in L_{\on{loc}}^1$, the $\lim_{r \to 0} A_r f(x) = f(x)$ for a.e. $x \in \R^n$.
+\end{theorem}
+
+\begin{proof}
+    It suffices to show that for $N \in \N$, $A_r f(x) \to f(x)$ for a.e. $x$ with $|x| < N$. Indeed, one can then just take the union of null sets corresponding to each $B(N, x)$. But for $|x| \leq N$ and $r \leq 1$, the values $A_r f(x)$ depend only on the values $f(y)$ for $|y| \leq N+1$, so replacing $f$ with $f \chi_{B(N+1, 0)}$, we may assume that $f \in L^1$.
+
+    Given $\eps > 0$, \cref{thm:2.41} gives a continuous integrable function $g$ such that $\int|g(y) - f(y)|\d y < \eps$. Continuity of $g$ implies that for every $x \in \R^n$ and $\delta > 0$ there exists $r > 0$ such that $|g(y) - g(x)| < \delta$ whenever $|y-x| < r$, and hence \[|A_r g(x) - g(x)| = \frac{1}{m(B(r, x))} \left|\int_{B(r, x)} (g(y) - g(x)) \d y \right| < \delta.\] Therefore $A_r g(x) \to g(x)$ as $r \to 0$ for every $x$, so \begin{align*}
+        \limsup_{r \to 0} | A_r f(x) - f(x) | &= \limsup_{r \to 0} |A_r(f - g)(x) + (A_r g - g)(x) + (g-f)(x)|\\
+        &\leq H(f-g)(x) + 0 + |f-g|(x).
+    \end{align*}
+    Hence, if we define \[E_\alpha = \{x : \limsup_{r \to 0} |A_r f(x) - f(x)| > \alpha\}, \ \ \ \ F_\alpha = \{x : |f-g|(x) > \alpha\},\] we have \[E_\alpha \subset F_{\alpha / 2} \cup \{x : H(f-g)(x) > \alpha / 2\}.\] But $(\alpha / 2)m(F_{\alpha / 2}) \leq \int_{F_{\alpha/2}} |f(x) - g(x)| \d x < \eps$, so by the maximal theorem, \[m(E_\alpha) \leq \frac{2\eps}{\alpha} + \frac{2C\eps}{\alpha}.\] Since $\eps$ is arbitrary, $m(E_\alpha) = 0$ for all $\alpha > 0$. To conclude, note that $\lim_{r \to 0} A_r f(x) = f(x)$ holds whenever $x \notin E_{1/n}$.
 \end{proof}
 
 
