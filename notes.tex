@@ -1612,7 +1612,7 @@ Now recall that a linear transformation is invertible if and only if it has a de
 
 We can actually generalize this ``change of variables'' result beyond linear maps. Let $G = (g_1, \ldots, g_n)$ be a map from some open set $\Omega \subset \R^n$ into $\R^n$ whose components are all $C^1$; i.e. $g_j$ all have continuous first order partial derivatives. We denote by $D_x G$ the linear map defined by the matrix $\Big( (\partial g_i / \partial x_j)(x) \Big)$ of partial derivatives at $x$. Observe that if $G$ is linear, then $D_x G = G$ for all $x$. $G$ is called a $C^1$ diffeomorphism if $G$ is injective and $D_x G$ is invertible for all $x \in \Omega$. In this case, the inverse function theorem guarantees that $G^{-1} : G(\Omega) \to \Omega$ is also a $C^1$ diffeomorphism and that $D_x(G^{-1}) = [D_{G^{-1}(x)}G]^{-1}$ for all $x \in G(\Omega)$.
 
-\begin{theorem}
+\begin{theorem}\label{thm:2.47}
     Suppose that $\Omega$ is an open set in $\R^n$ and $G : \Omega \to \R^n$ is a $C^1$ diffeomorphism. \begin{enumerate}
         \item If $f$ is a Lebesgue measurable function on $G(\Omega)$, then $f \circ G$ is Lebesgue measurable on $\Omega$. If $f \geq 0$, or $f \in L^1(G(\Omega), m)$, then \[\int_{G(\Omega)} f(x)\d x = \int_{\Omega} f \circ G(x) |\det D_x G| \d x.\]
         \item If $E \subset \Omega$ and $E \in \SL^n$, then $G(E) \in \SL^n$ and $m(G(E)) = \int_E |\det D_x G| \d x$.
@@ -1625,7 +1625,91 @@ We can actually generalize this ``change of variables'' result beyond linear map
 
 \subsection{Integration in Polar Coordinates}
 
-\dhcomment{Left to review.}
+The most important nonlinear coordinate systems in $\R^2$ and $\R^3$ are polar coordinates ($x = r \cos \theta$, $y = r \sin \theta$) and spherical coordinates ($x = r \sin \phi \cos \theta$, $y = r \sin \phi \sin \theta$, $z = r \cos \phi$). \Cref{thm:2.47}, applied to these coordinates, yields the familiar formulas (loosely stated) $\d x \d y = r \d r \d \theta$ and $\d x \d y \d z = r^2 \sin \phi \d r \d \theta \d \phi$. 
+
+Similar coordinate systems exist in higher dimensions, but they become increasingly complicated as the dimensions increase (see Exercise 65). For most purposes, however, it suffices to know that the Lebesgue measure is effectively the product of the measure $r^{n-1} \d r$ on $(0, \infty)$ and a certain ``surface measure'' on the unit sphere ($\d \theta$ for $n = 2$ and $\sin \phi \d\theta \d\phi$ for $n = 3$).
+
+\begin{definition}
+    We denote the unit sphere $S^{n-1} = \{x \in \R^n : |x| = 1\}$. If $x \in \R^n \setminus \{0\}$, the polar coordinates of $x$ are \[r = |x| \in (0, \infty), \ \ \ \ \ \ x' = \frac{x}{|x|} \in S^{n-1}.\] The map $\Phi(x) = (r, x')$ is a continuous bijection $\R^n \setminus \{0\} \to (0, \infty) \times S^{n-1}$ whose (continuous) inverse is $\Phi^{-1}(r, x') = rx'$. Indeed, $\Phi$ is a diffeomorphism. We denote by $m_*$ the Borel measure on $(0, \infty) \times S^{n-1}$ induced by $\Phi$ from the Lebesgue measure on $\R^n$, that is, $m_*(E) := m(\Phi^{-1}(E))$. Moreover, we define the measure $\rho = \rho_n$ on $(0, \infty)$ by $\rho(E) = \int_E r^{n-1}\d r$.
+\end{definition}
+
+\begin{theorem}
+    There is a unique Borel measure $\sigma = \sigma_{n-1}$ on $S^{n-1}$ such that $m_* = \rho \times \sigma$. If $f$ is Borel measurable on $\R^n$ and $f \geq 0$ or $f \in L^1(m)$, then \begin{align}\label{eq:2.50}
+        \int_{\R^n}f \d x = \int_0^\infty \int_{S^{n-1}} f(rx') r^{n-1} \d \sigma(x') \d r.
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    \Cref{eq:2.50}, when $f$ is a characteristic function of a set, is merely a restatement of the equation $m_* = \rho \times \sigma$, and it follows for general $f$ by the usual linearity and approximation arguments. Hence, we need only construct $\sigma$.
+
+    If $E$ is a Borel set in $S^{n-1}$, for $a > 0$, let \[E_a = \Phi^{-1}\big((0, a] \times E \big) = \{rx' : 0 < r \leq a, x' \in E\}.\] If $m_* = \rho \times \sigma$ is to hold for $E_1$, then we must have \[m(E_1) = m_*((0, 1] \times E) = \int_0^1 \int_E r^{n-1} \d \sigma(x') \d r = \sigma(E) \int_0^1 r^{n-1} \d r = \frac{\sigma(E)}{n}.\] We therefore define $\sigma(E) := n \cdot m(E_1)$. Since the map $E \mapsto E_1$ takes Borel sets to Borel sets and commutes with unions, intersections, and complements, it is clear that $\sigma$ is a Borel measure on $S^{n-1}$. Also, since $E_a$ is the image of $E_1$ under the map $x \mapsto ax$, it follows from \cref{thm:2.44} that $m(E_a) = a^n m(E_1)$, and hence, if $0 < a < b$, \begin{align*}
+        m_*\big( (a, b] \times E \big) &= m(E_b \setminus E_a) = \frac{b^n - a^n}{n} \sigma(E) \\
+        &= \sigma(E) \int_a^b r^{n-1}\d r = \rho \times \sigma \big( (a,b] \times E \big).
+    \end{align*}
+
+    Now fix $E \in \SB_{S^{n-1}}$ and let $\SA_E$ be the collection of finite disjoint unions of sets of the form $(a, b] \times E$ or $(a, \infty) \times E$. Since such sets form an elementary family, $\SA_E$ is an algebra on $(0, \infty) \times E$ that generates the $\sigma$-algebra $\SM_E = \{A \times E : A \in \SB_{(0, \infty)}$. By the preceding calculation we have $m_* = \rho \times \sigma$ on $\SA_E$, and hence by the uniqueness assertion of \cref{thm:premeasure-induced-measure}, $m_* = \rho \times \sigma$ on $\SM_E$. But $\bigcup \{\SM_E : E \in \SB_{S^{n-1}}$ is precisely the set of Borel rectangles in $(0, \infty) \times S^{n-1}$, so another application of the uniqueness thoerem shows that $m_* = \rho \times \sigma$ on all Borel sets.
+\end{proof}
+
+\noindent Of course, \cref{eq:2.50} can be extended to Lebesgue measurable functions by considering the completion of the measure $\sigma$. Details are left to the reader.
+
+\begin{corollary}\label{cor:2.51}
+    If $f$ is a measurable function on $\R^n$, nonnegative or integrable, such that $f(x) = g(|x|)$ for some function $g$ on $(0, \infty)$, then \[\int f(x) \d x = \sigma(S^{n-1}) \int_0^\infty g(r) r^{n-1}\d r.\]
+\end{corollary}
+
+\begin{corollary}
+    Let $c$ and $C$ denote positive constants, and let $B = \{x \in \R^n : |x| < c\}$. Suppose that $f$ is a measurable function on $\R^n$. \begin{enumerate}
+        \item If $|f(x)| \leq C|x|^{-a}$ on on $B$ for some $a < n$, then $f \in L^1(B)$. However, if $|f(x)| \geq C|x|^{-n}$ on $B$, then $f \notin L^1(B)$.
+        \item If $|f(x)| \leq C|x|^{-a}$ on $B^c$ for some $a > n$, then $f \in L^1(B^c)$. However, if $|f(x)| \geq C|x|^{-n}$ on $B^c$, then $f \notin L^1(B^c)$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    Apply \cref{cor:2.51} to $|x|^{-a}\chi_B$ and $|x|^{-a}\chi_{B^c}$.
+\end{proof}
+
+We shall compute $\sigma(S^{n-1})$ shortly. Of course, we know that $\sigma(S^1) = 2\pi$; this is just the definition of $2 \pi$ as the ratio of teh circumference of a circle to its radius. Armed with this fact, we can compute a very important integral.
+
+\begin{proposition}\label{prop:2.53}
+    If $a > 0$, \[\int_{\R^n} \exp(-a|x|^2)\d x = \left(\frac{\pi}{a}\right)^{n/2}.\]
+\end{proposition}
+
+\begin{proof}
+    Denote the integral on the left by $I_n$. For $n = 2$, by \cref{cor:2.51}, we have \[I_2 = 2\pi \int_0^\infty re^{-ar^2}\d r = \left(\frac{\pi}{2}\right) e^{-ar^2} \Big|_0^\infty = \frac{\pi}{a}.\] Since $\exp(-a|x|^2) = \prod_1^n \exp(-x_j^2)$, Tonelli's theorem implies that $I_n = (I_1)^n$. In particular, $I_1 = (I_2)^{1/2}$, so $I_n = (I_2)^{n/2} = (\pi/2)^{n/2}$.
+\end{proof}
+
+Once we know this result, the device used in its proof can be turned around to compute $\sigma(S^{n-1})$ for all $n$ in terms of the gamma function.
+
+\begin{proposition}
+    $\sigma(S^{n-1}) = \frac{2\pi^{n/2}}{\Gamma(n/2)}$.
+\end{proposition}
+
+\begin{proof}
+    By \cref{cor:2.51,prop:2.53} and the substitution $s = r^2$, we have \begin{align*}
+        \pi^{n/2} &= \int_{R^n} e^{-|x|^2} \d x = \sigma(S^{n-1}) \int_0^\infty r^{n-1} e^{-r^2} \d r\\
+        &= \frac{\sigma(S^{n-1})}{2} \int_0^\infty s^{(n/2) - 1}e^{-s} \d s = \frac{\sigma(S^{n-1})}{2} \Gamma\left(\frac{n}{2}\right).
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    If $B^n = \{x \in \R^n : |x| < 1\}$, then $m(B^n) = \frac{\pi^{n/2}}{\Gamma(\frac{1}{2}n + 1)}$.
+\end{corollary}
+
+\begin{proof}
+    By definition of $\sigma$, we have $m(B^n) = n^{-1} \sigma(S^{n-1})$. Moreover, $\frac{1}{2}n \Gamma(\frac{1}{2}n) = \Gamma(\frac{1}{2}n + 1)$ by the functional equation for the Gamma function. The equality follows immediately.
+\end{proof}
+
+Recall that $\Gamma(n) = (n-1)!$. Now, we can also evaluate at the half integers.
+
+\begin{proposition}\label{prop:2.56}
+    $\Gamma(n + \frac{1}{2}) = (n - \frac{1}{2})(n - \frac{3}{2}) \cdots (\frac{1}{2})\sqrt{\pi}$.
+\end{proposition}
+
+\begin{proof}
+    We have $\Gamma(n + \frac{1}{2}) = (n - \frac{1}{2})(n - \frac{3}{2}) \cdots (\frac{1}{2})\Gamma(\frac{1}{2})$ by the functional equation, and by \cref{prop:2.53} and the substitution $s = r^2$, \[\Gamma\left(\frac{1}{2}\right) = \int_0^\infty s^{-1/2}e^{-s} \d s = 2 \int_0^\infty e^{-r^2} \d r = \int_{-\infty}^{\infty} e^{-r^2} \d r = \sqrt{\pi}.\]
+\end{proof}
+
+\noindent An amsuing consequence of \cref{prop:2.56} and the formula $\Gamma(n) = (n-1)!$ is that the surface measure of the unit sphere and the Lebesgue measure of the unit ball in $\R^n$ are always rational multiples of integer powers of $\pi$, and the power of $\pi$ increases by 1 when $n$ increases by 2.
+
 
 \section{Signed Measures and Differentiation}
 
@@ -2220,7 +2304,7 @@ If $F \in \NBV$, it is customary to denote the integral of a function $g$ with r
 \end{theorem}
 
 \begin{proof}
-    $F$ and $G$ are linear combinations of increasing functions in $\NBV$ by \cref{thm:3.27}. By a simple calculation, it suffices to assume $F$ and $G$ are increasing. \dhcomment{Come back.} Suppose w.l.o.g. that $G$ is continuous, and let $\Omega = \{(x, y) : a < x \leq y \leq b\}$. We use Fubini's to compute $\mu_F \times \mu_G(\Omega)$ in two ways. \begin{align*}
+    $F$ and $G$ are linear combinations of increasing functions in $\NBV$ by \cref{thm:3.27}. By a simple calculation, it suffices to assume $F$ and $G$ are increasing. Suppose w.l.o.g. that $G$ is continuous, and let $\Omega = \{(x, y) : a < x \leq y \leq b\}$. We use Fubini's to compute $\mu_F \times \mu_G(\Omega)$ in two ways. \begin{align*}
         \mu_F \times \mu_G(\Omega) &= \int_{(a, b]}\int_{(a, y]} \d F(x) \d G(y) = \int_{(a, b]} [F(y) - F(a)] \d G(y)\\
         &= \int_{(a, b]}F \d G - F(a)[G(b) - F(a)].
     \end{align*}
