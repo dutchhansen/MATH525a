@@ -54,7 +54,7 @@ Lectures by Prof. Juhi Jang. We use \cite{folland1999real}. This book is littere
 \end{example}
 
 \begin{example}[Generalized functions]
-    Measure theory will also yield some generalization of functions. Consider the sequence $(f_n)$ for indicator function \[f_n(x) = n \cdot \chi_{[0, 1/n]}(x).\] This is certainly Riemann-integrable for every $n$. What about the limit? Take any $\phi \in C_c^{\infty}(\R)$, a smooth function with compact support. One can show that as $n \to \infty$, we have \[\int_\R f_n(x) \phi(x) \d x \to \phi(0).\] Interestingly, however, there is no function $f$ such that for arbitrary $\phi \in C_c^{\infty}(\R)$, \[\phi(0) = \int_\R f(x) \phi(x) \d x.\] To better understand this situation, we need ``measures,'' or generalized functions. In particular, we will study the Dirac measure $\delta_0(x)$.
+    Measure theory will also yield some generalization of functions. Consider the sequence $(f_n)$ for indicator function \[f_n(x) = n \cdot \chi_{[0, 1/n]}(x).\] This is certainly Riemann-integrable for every $n$. What about the limit? Take any $\phi \in C_c^{\infty}(\R)$, a smooth function with compact support. One can show that as $n \to \infty$, we have \[\int_\R f_n(x) \phi(x) \d x \to \phi(0).\] Interestingly, however, there is no function $f$ such that for arbitrary $\phi \in C_c^{\infty}(\R)$, \[\phi(0) = \int_\R f(x) \phi(x) \d x.\] To better understand this situation, we need ``measures,'' or generalized functions. In particular, we will need to study the Dirac measure $\delta_0(x)$.
 \end{example}
 
 \begin{example}[Convergence properties and completeness]
@@ -148,38 +148,23 @@ Let $f : X \to Y$. For any indexed collection of subsets $\{E_\alpha\}$, it hold
     The Axiom of Choice implies the Axiom of Dependent Choice.
 \end{proposition}
 
+\subsection{More About Well-Ordered Sets}
+
+We skip a review of cardinality in \citet{folland1999real}. \dhcomment{Finish.}
+
 \subsection{The Extended Reals}
 
-\subsubsection{Standard Topology}
+Those familiar with the basic properties of $\ol{\R}$ may skip to \cref{sec:folland-R-extended}. What follows here may serve as a reference.
 
-Recall that the standard topology on $\R$ is the topology whose basis is all open intervals. Considering $\ol{\R}$, let \[\CB_1 = \{(a, b) :  a, b \in \R, a < b\}, \ \ \ \CB_2 = \{[-\infty, a) : a \in \R\}, \ \ \ \CB_3 = \{(b, + \infty] : b \in \R\}.\] Now let $\ol{\CB} = \CB_1 \cup \CB_2 \cup \CB_3$. Since this collection covers $X$ and satisfies the intersection property, it is a basis for a topology $\ol{\CT}$, which we refer to as the standard topology on $\ol{\R}$. This topology is also compatible with the standard topology $\CT$ on $\R$, in the following sense.
+\subsubsection{The Standard Topology}
+
+Recall that the standard topology on $\R$ is the topology whose basis is all open intervals. Considering $\ol{\R}$, let \[\CB_1 = \{(a, b) :  a, b \in \R, a < b\}, \ \ \ \CB_2 = \{[-\infty, a) : a \in \R\}, \ \ \ \CB_3 = \{(b, + \infty] : b \in \R\}.\] Now let $\ol{\CB} = \CB_1 \cup \CB_2 \cup \CB_3$. Since this collection covers $\ol{\R}$ and satisfies the intersection property, it is a basis for a topology $\ol{\CT}$, which we refer to as the standard topology on $\ol{\R}$. This topology is also compatible with the standard topology $\CT$ on $\R$, in the following sense.
 
 \begin{proposition}
     Let $\CT$ and $\ol{\CT}$ be the standard topologies for $\R$ and $\ol{\R}$, respectively. Let $E \subset \ol{\R}$. Then $E \in \ol{\CT}$ if and only if $E \cap \R \in \CT$.
 \end{proposition}
 
-\noindent It should be noted that this topology is metrizable, but the metric is very different from that which generates the standard topology on $\R$.
-
-\subsubsection{Infinite Limits and Limits at Infinity}
-
-Most of our work amounts to studying familiar definitions with the special case where $\pm \infty$ is involved. Many of the claims have mechanical proofs, which are omitted.
-
-\begin{proposition}
-    Let $\ol{\R}$ have the standard topology. Then \begin{enumerate}
-        \item If $U$ is a neighborhood of $+\infty$ in $\ol{\R}$, then there exists $M \in \R$ such that $(M, +\infty] \subset U$.
-        \item If $A \subset \R$ and $A$ is not bounded above in $\R$, then $+\infty$ is a limit point of $A$ with respect to $\ol{\R}$.
-    \end{enumerate}
-\end{proposition}
-
-\begin{proposition}[Infinite limits, limits at infinity]
-    \begin{enumerate}
-        \item Let $A \subset \R$, let $p \in \R$ be a limit point of $A$ with respect to $\R$, and let $f : A \to \ol{\R}$ be a function. Then $\lim_{x \to p} f(x) = +\infty$ if and only if for every $L \in \R$, there exists some $\delta > 0$ such that $0 < |x-p| < \delta$ and $x \in A$ together imply that $f(x) > L$.
-        \item Let $B \subset \R$ that is not bounded above in $\R$, and let $g : B \to \ol{\R}$ be a ffunction. Let $q$ be a real number. Then $\lim_{x \to \infty} g(x) = q$ if and only if for every $\eps > 0$, there exists some $M \in \R$ such that $x > M$ and $x \in B$ together imply that $|g(x) - q| < \eps$.
-        \item Let $C \subset \R$ that is bot bounded above in $\R$, let $h : C \to \ol{\R}$ be a function. Then $\lim_{x \to \infty} h(x) = \infty$ if and only if for every $N \in \R$, there exists some $P \in \R$ such that $x > P$ and $x \in C$ together imply that $h(x) > N$.
-    \end{enumerate}
-\end{proposition}
-
-It turns out that while $\R$ is not compact, $\ol{\R}$ is compact. Before proceeding, it's worth noting that the standard topology on $\R$ is induced by the metic $\ol{d} : \ol{\R} \times \ol{\R} \to \R$.\[\ol{d}(x, y) = |f(x) - f(y)|, \ \ \ \ \text{where} \ \ \ \ f(x) = \begin{cases}
+It turns out that while $\R$ is not compact, $\ol{\R}$ is compact. It also turns out that $\ol{\R}$ is metrizable. The standard topology on $\ol{\R}$ is induced by the metic $\ol{d} : \ol{\R} \times \ol{\R} \to \R$.\[\ol{d}(x, y) = |f(x) - f(y)|, \ \ \ \ \text{where} \ \ \ \ f(x) = \begin{cases}
     1 &x = \infty\\
     \frac{x}{1+|x|} &x \in \R\\
     -1 &x = -\infty.
@@ -193,12 +178,33 @@ It turns out that while $\R$ is not compact, $\ol{\R}$ is compact. Before procee
     Construct homeomorphism $f : [-\infty, \infty] \to [-1,1]$.
 \end{proof}
 
+\subsubsection{Infinite Limits and Limits at Infinity}
+
+Most of our work in this section amounts to studying familiar definitions with the special case where $\pm \infty$ is involved. Many of the claims have mechanical proofs, which are omitted.
+
+\begin{proposition}
+    Let $\ol{\R}$ have the standard topology. Then \begin{enumerate}
+        \item If $U$ is a neighborhood of $+\infty$ in $\ol{\R}$, then there exists $M \in \R$ such that $(M, +\infty] \subset U$.
+        \item If $A \subset \R$ and $A$ is not bounded above in $\R$, then $+\infty$ is a limit point of $A$ with respect to $\ol{\R}$.
+    \end{enumerate}
+\end{proposition}
+
+We now characterize what it means for certain limits to hold in $\ol{\R}$, using the general definition of convergence in topological spaces.
+
+\begin{proposition}[Infinite limits, limits at infinity]
+    \begin{enumerate}
+        \item Let $A \subset \R$, let $p \in \R$ be a limit point of $A$ with respect to $\R$, and let $f : A \to \ol{\R}$ be a function. Then $\lim_{x \to p} f(x) = +\infty$ if and only if for every $L \in \R$, there exists some $\delta > 0$ such that $0 < |x-p| < \delta$ and $x \in A$ together imply that $f(x) > L$.
+        \item Let $B \subset \R$ that is not bounded above in $\R$, and let $g : B \to \ol{\R}$ be a function. Let $q$ be a real number. Then $\lim_{x \to \infty} g(x) = q$ if and only if for every $\eps > 0$, there exists some $M \in \R$ such that $x > M$ and $x \in B$ together imply that $|g(x) - q| < \eps$.
+        \item Let $C \subset \R$ that is not bounded above in $\R$, let $h : C \to \ol{\R}$ be a function. Then $\lim_{x \to \infty} h(x) = \infty$ if and only if for every $N \in \R$, there exists some $P \in \R$ such that $x > P$ and $x \in C$ together imply that $h(x) > N$.
+    \end{enumerate}
+\end{proposition}
+
 \subsubsection{One-Sided Limits and Types of Discontinuities}
 
 We consider real-valued functions defined on some interval $(a, b)$ of $\R$. The discussion can be easily extended to the case where $a$ or $b$ are infinite, but we keep things simple by restricting to the latter case.
 
 \begin{definition}
-    Let $f : (a, b) \to \R$ be a function and assume $x \in [a, b)$. We write $f(x+) = q$ if whenever $(t_n)$ is a sequence in $(x, b)$ which converges to $x$, we have $f(t_n) \to q$. We call this the limit from the right. The limit from the left is analogous.
+    Let $f : (a, b) \to \R$ be a function and assume $x \in [a, b)$. We write $f(x+) = q$ if whenever $(t_n)$ is a sequence in $(x, b)$ which converges to $x$ we have $f(t_n) \to q$. We call this the limit from the right. The limit from the left is analogous.
 \end{definition}
 
 \begin{remark}
@@ -207,8 +213,8 @@ We consider real-valued functions defined on some interval $(a, b)$ of $\R$. The
 
 \begin{definition}[Types of discontinuities]
     Let $f : (a, b) \to \R$ be a function and let $x \in (a,b)$. Assume that $f(x+)$ and $f(x-)$ both exist. \begin{enumerate}
-        \item If $f(x+) = f(x-)$ but $f$ is not continuous at $x$, then we say that $f$ has a removable discontinuity at $x$.
-        \item If $f(x+) \neq f(x-)$, then we say that $f$ has a jump discontinuity at $x$.
+        \item If $f(x+) = f(x-)$ but $f$ is not continuous at $x$, we say that $f$ has a removable discontinuity at $x$.
+        \item If $f(x+) \neq f(x-)$, we say that $f$ has a jump discontinuity at $x$.
     \end{enumerate} In either case, we say that $f$ has a discontinuity of the first kind at $x$. If one of $f(x+)$ or $f(x-)$ does not exist, then $f$ is said to have an essential discontinuity, or discontinuity of the second kind, at $x$.
 \end{definition}
 
@@ -236,17 +242,80 @@ We consider real-valued functions defined on some interval $(a, b)$ of $\R$. The
 
 \subsubsection{Upper and Lower Limits}
 
-\dhcomment{To complete.}
+Let $(s_n)_1^\infty$ be a sequence of real numbers. For each $n \in \N$, define $d_n = \sup\{s_k : k \in \N, k \geq n\}$. Then $(d_n)_1^\infty$ is a monotonically decreasing sequence in $\ol{\R}$. The following thus makes sense.
 
-\subsubsection{Limits of Special Sequences}
+\begin{definition}
+    Let $(s_n)_1^\infty$ be a sequence in $\ol{\R}$. Then the upper and lower limits of $(s_n)_1^\infty$ are defined by \begin{align*}
+        \limsup_{n \to \infty} s_n &= \lim_{n \to \infty} \left( \sup_{k \geq n} s_k \right) = \inf_{n \in \N} \left( \sup_{k \geq n} s_k \right)\\
+        \liminf_{n \to \infty} s_n &= \lim_{n \to \infty} \left( \inf_{k \geq n} s_k \right) = \sup_{n \in \N} \left( \inf_{k \geq n} s_k \right).
+    \end{align*}
+\end{definition}
 
-\dhcomment{To complete.}
+We briefly characterize such limits.
+
+\begin{proposition}
+    Let $(s_n)_1^\infty$ and $(t_n)_1^\infty$ be sequences in $\ol{\R}$. \begin{enumerate}
+        \item If $s_n \leq t_n$ for all $n$ and $\lim_{n \to \infty} s_n = +\infty$, then $\lim_{n \to \infty} t_n = +\infty$.
+        \item If $(s_n)_1^\infty$ and $(t_n)_1^\infty$ converge in $\ol{\R}$ to $s$ and $t$ respectively, and if $s_n \leq t_n$ for each $n \in \N$, then $s \leq t$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+    Let $(s_n)_1^\infty$ be a sequence in $\ol{\R}$. Let $S^*$ denote the set of its subsequential limits in $\ol{\R}$, and denote $\alpha = \limsup_{n \to \infty} s_n$. Let $x \in \ol{\R}$. Then \begin{enumerate}
+        \item $S^*$ is nonempty, and $\alpha = \sup S^* \in S^*$. In particular, there is a subsequence of $S$ that converges to $\alpha$.
+        \item $\alpha < x$ if and only if there exists $y < x$ such that $s_n \leq y$ for all but finitely many $n \in \N$. In particular, if $\alpha < x$, then $s_n < x$ for all but finitely many $n \in \N$. And if $s_n < x$ for all but finitely many $n \in \N$, then $\alpha \leq x$.
+        \item $\alpha > x$ if and only if $s_n > x$ for infinitely many $n \in \N$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (i) To see that $S^*$ is nonempty, note that $(\ol{\R}, \ol{d})$ is compact; therefore it is sequentially compact, which by definition means that $S^*$ cannot be empty. Furthermore, $S^*$ is closed in $\ol{\R}$ by a more general result about the set of subsequential limits in a metric space. To see that $\sup S^* \in S^*$, we consider three cases.
+    \begin{enumerate}
+        \item $\sup S^* = -\infty$. Then $S^*$ cannot contain any elements of $\ol{\R}$ except possibly $-\infty$; on the other hand, $S^*$ is nonempty, so $S^* = \{-\infty\}$ and the claim holds.
+        \item $\sup S^* \in \R$. Then $S^* \cap \R$ is a closed subset of $\R$ which is bounded above in $\R$, and consequently $\sup S^* = \sup(S^* \cap \R) \in S^* \cap \R \subset S^*$.
+        \item $\sup S^* = +\infty$. If $+\infty \notin S^*$, then there exists a neighborhood of $+\infty$ of the form $(M, +\infty]$ which does not intersect $S^*$; this implies that $S^*$ is bounded above, contradicting the assumption that $\sup S^* = +\infty$.
+    \end{enumerate}
+
+    Next, we prove that $\alpha \geq \sup S^*$. Let $s$ be any element of $S^*$, and let $(s_{n_k})_{k=1}^{\infty}$ denote the subsequence of $(s_n)_1^\infty$ that converges to $s$ in $\ol{\R}$. Denote $d_n = \sup_{k \geq n} s_n$. Then for each $k \in \N$, we have \[s_{n_k} \leq d_{n_k} \leq d_k.\] Taking limits, we conclude that \[s = \lim_{k \to \infty} s_{n_k} \leq \lim_{k \to \infty} d_k = \alpha.\] Thus $\alpha$ is an upper bound for $S^*$, so $\sup S^* \leq \alpha$.
+
+    To prove the opposite inequality, we argue by contradiction. Assume that $\sup S^* < \alpha$, and let $\beta \in \R$ such that $\sup S^* < \beta < \alpha$. We claim that there exists $N \in \N$ such that $n \geq N$ implies $s_n \leq \beta$. Indeed, if no such $N$ exists, then there exists a subsequence $(s_{n_k})$ whose terms all exceed $\beta$. This subsequence will in turn have a further subsequence $(s_{n_{k_\ell}})$ which converges in $\ol{\R}$; its subsequential limit $s$ whill bet at least $\beta$. But then $s \in S^*$ and $s \geq \beta > \sup S^*$, which is a contradiction. Hence, $\limsup_{n \to \infty} s_n \leq \beta < \alpha$. This is a contradiction.
+
+    (ii) The statement $\limsup_{n \to \infty} s_n < x$ holds if and only if there exists $N \in \N$ such that $\sup_{k \geq N} s_k < x$, i.e. $s_k \leq y := \sup_{j \geq N} s_j < x$ for all $k \geq N$. This is true if and only if only finitely many $s_k$ possibly exceed $x$. (iii) follows from (i) since we can find a subsequence $(s_{n_k})_1^\infty$ that converges to $\alpha$. We finish by choosing $N \in \N$ such that $k \geq N$ implies $s_{n_k} > x$.
+\end{proof}
+
+\begin{theorem}
+    Let $(s_n)_1^\infty$ be a sequence in $\ol{\R}$. Then $\lim_{n \to \infty} s_n = s$ if and only if $\limsup_{n \to \infty} s_n = \liminf_{n \to \infty} s_n = s$.
+\end{theorem}
+
+\begin{proof}
+    Let $S^*$ denote the set of subsequential limits of $(s_n)$ in $\ol{\R}$. Let $(t_k)_1^\infty$ and $(u_k)_1^\infty$ be subsequences $(s_n)_1^\infty$ that converge to $\limsup_{n \to \infty} s_n = \sup S^*$ and $\liminf_{n \to \infty} s_n = \inf S^*$, respectively. 
+
+    If $\lim s_n = s$, then every subsequence of $s_n$ tends to $s$; in particular this is true of the sequences $(t_k)_1^\infty$ and $(u_k)_1^\infty$. By uniqueness of limits, $s = \limsup_{n \to \infty} s_n = \liminf_{n \to \infty} s_n$. For the opposite direction, we argue by contradiction. Assume that $s = \limsup_{n \to \infty} s_n = \liminf_{n \to \infty} s_n$ but that $\lim_{n \to \infty} s_n = s$ fails. Then $\sup S^* = \inf S^* = s$, so $S^* = \{s\}$. But there exists a neighborhood $U$ of $s$ and a subsequence $(s_{n_k})_1^\infty$ such that $\{s_{n_k}\}_1^\infty$ lies entirely outside $U$. Since $\ol{\R}$ is sequentially compact, $(s_{n_k})_1^\infty$ has a further subsequence $(s_{n_{k_\ell}})_1^\infty$ which converges to some point $p$ of $\ol{\R}$, which must be outside $U$ and therefore cannot be equal to $s$. But then $p \in S^* = \{s\}$, which is impossible.
+\end{proof}
+
+\begin{proposition}
+    Let $(a_n)_1^\infty$ and $(b_n)_1^\infty$ be sequences of real numbers. Then it holds that \[\limsup_{n \to \infty} (a_n + b_n) \leq \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n,\] provided that the RHS is not of the form $\infty - \infty$.\footnote{Here, we use the usual conventions involving addition and subtraction of $\pm \infty$.}
+\end{proposition}
+
+\subsubsection{Limits of Some Special Sequences}
+
+\begin{theorem}
+    The following limits hold:\begin{enumerate}
+        \item If $p > 0$, then $\lim_{n \to \infty} 1/n^p = 0$.
+        \item If $q > 0$, then $\lim_{n \to \infty} \sqrt[n]{q} = 1$.
+        \item $\lim_{n \to \infty} \sqrt[n]{n} = 1$.
+        \item If $|x| < 1$, then $\lim_{n \to \infty} x^n = 0$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (i) Choose $\eps > 0$, and let $N$ be any integer larger than $\eps^{-1/p}$. Then $n \geq N$ implies $n^{-p} \leq N^{-p} < (\eps^{-1/p})^p = \eps$. (ii) If $q = 1$, then $\sqrt[n]{q} = 1$ for all $n$. If $q > 1$, put $x_n = \sqrt[n]{q} - 1$. Then $x_n > 0$ and $1 + nx_n \leq (1 + x_n)^n = (\sqrt[n]{q})^n = p$ by the Binomial theorem. It follows that $x_n \in (0, (q - 1)/n)$ for all $n$, and $x_n \to 0$, so $\sqrt[n]{q} \to 1$. Alternatively, if $q \in (0, 1)$, then $1/q > 1$, so \[\sqrt[n]{q} = \frac{1}{\sqrt[n]{1/q}} \to \frac{1}{1} = 1.\] (iii) Put $x_n = \sqrt[n]{n} - 1$; then \[n = (1 + x_n)^n \geq \binom{n}{2}x_n^2 = \frac{n(n-1)}{2}x_n^2.\] Thus $0 \leq x_n \leq \sqrt{\frac{2}{n-1}}$ for $n \geq 2$, giving $x_n \to 0$ and $\sqrt[n]{n} \to 1$. (iv) Since $|x^n| = |x|^n$, we may assume $x \in (0, 1)$ without loss of generality. In this case, $x = (1 + p)^{-1}$ for some $p > 0$, and $(1 + p)^{n} \geq np$, so \[0 < x^n = (1 - p)^{-n} \leq \frac{1}{p} \cdot \frac{1}{n}.\] The sequence on the right tends to zero by (i), so we are done.
+\end{proof}
 
 
-\subsubsection{Folland etc.}
+\subsubsection{Additional points from Folland}\label{sec:folland-R-extended}
 
-From the least upper bound property of $\R$, it follows that every sequence $(a_n)_{n=1}^{\infty}$ in $\ol{\R}$ has a limit inferior and limit superior. \[\limsup(a_n) := \inf_{k \geq 1} \left(\sup_{n \geq k} a_n \right), \ \ \ \ \ \ \liminf(a_n) := \sup_{k \geq 1} \left( \inf_{n \geq k} a_n \right).\]
-A sequence $(a_n)_{n=1}^{\infty}$ converges in $\R$ if and only if these two sequences are equal and finite, in which case the limit is their common value. One can also define these notions for functions $f : \R \to \ol{\R}$, for instance, \[\limsup_{x \to a} f(x) = \inf_{\delta > 0} \left( \sup_{0 < |z-a| < \delta} f(x) \right).\]
+We visit some additional notes on $\ol{\R}$ from the preface to \citet{folland1999real}. One can define the notion of a limit supremum and limit infemum for functions $f : \R \to \ol{\R}$, for instance, \[\limsup_{x \to a} f(x) = \inf_{\delta > 0} \left( \sup_{0 < |z-a| < \delta} f(x) \right).\]
 
 Uncountable sums are occasionally relevant. For an arbitrary set $X$ and function $f : X \to [0,\infty]$, we define \[\sum_{x \in X} f(x) = \sup \left\{\sum_{x \in F} f(x) : F \subset X, \ \text{$F$ finite}\right\}.\]
 
