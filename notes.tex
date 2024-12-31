@@ -150,7 +150,7 @@ Let $f : X \to Y$. For any indexed collection of subsets $\{E_\alpha\}$, it hold
 
 \subsection{More About Well-Ordered Sets}
 
-We skip a review of cardinality in \citet{folland1999real}. \dhcomment{Finish.}
+We skip a review of cardinality in \citet{folland1999real}.
 
 \subsection{The Extended Reals}
 
@@ -361,12 +361,12 @@ We want to measure arbitrary sets. We naively try to do this by constructing a m
 
 Our motivating question becomes: how can we rectify this issue? Are we asking too much from $\mu$? Or are we asking for too large of a domain? To better understand this situation, we cite but do not prove an illustrative result.
 
-\begin{theorem}[Banach-Tarski, 1924]
+\begin{theorem}[Banach-Tarski; informal]
     Suppse $U, V$ are two bounded open sets in $\R^n$, $n \geq 3$. Then there exists $k
     \in \N$ and sets $E_1, \ldots, E_k \subset \R^n$, $F_1, \ldots, F_k \subset \R^n$ such that \begin{itemize}
         \item the $E_i$ are pairwise disjoint, and the $F_i$ are pairwise disjoint;
         \item $\bigcup E_i = U$ and $\bigcup F_i = V$;
-        \item for each $j$, $E_j$ is congruent to $F_j$.
+        \item for each $j$, $E_j$ is ``congruent'' to $F_j$.
     \end{itemize}
 \end{theorem}
 
@@ -432,7 +432,7 @@ We attempt to resolve the issues found above through the $\sigma$-algebra.
     Note that $\SM(\CF)$ is a $\sigma$-algebra containing $\CE$, but $\SM(\CE)$ is the intersection of all $\sigma$-algebra containing $\CE$.
 \end{proof}
 
-\dhcomment{can be constructed with tansfinite induction}
+\noindent For a collection, $\CE \subset 2^X$, the $\sigma$-algebra $\SM(\CE)$ can be defined explicitly. The construction uses transfinite induction, however, and is left to the curious reader.
 
 \subsubsection{Metric Spaces}
 
@@ -1692,7 +1692,7 @@ We can actually generalize this ``change of variables'' result beyond linear map
     For those interested, be sure to have \href{https://sites.math.washington.edu//~folland/Homepage/oldreals.pdf}{Folland errata} handy.
 \end{proof}
 
-\subsection{Integration in Polar Coordinates}
+\subsection{Integration in Polar Coordinates}\label{sec:polar-integration}
 
 The most important nonlinear coordinate systems in $\R^2$ and $\R^3$ are polar coordinates ($x = r \cos \theta$, $y = r \sin \theta$) and spherical coordinates ($x = r \sin \phi \cos \theta$, $y = r \sin \phi \sin \theta$, $z = r \cos \phi$). \Cref{thm:2.47}, applied to these coordinates, yields the familiar formulas (loosely stated) $\d x \d y = r \d r \d \theta$ and $\d x \d y \d z = r^2 \sin \phi \d r \d \theta \d \phi$. 
 
@@ -1736,7 +1736,7 @@ Similar coordinate systems exist in higher dimensions, but they become increasin
     Apply \cref{cor:2.51} to $|x|^{-a}\chi_B$ and $|x|^{-a}\chi_{B^c}$.
 \end{proof}
 
-We shall compute $\sigma(S^{n-1})$ shortly. Of course, we know that $\sigma(S^1) = 2\pi$; this is just the definition of $2 \pi$ as the ratio of teh circumference of a circle to its radius. Armed with this fact, we can compute a very important integral.
+We shall compute $\sigma(S^{n-1})$ shortly. Of course, we know that $\sigma(S^1) = 2\pi$; this is just the definition of $2 \pi$ as the ratio of the circumference of a circle to its radius. Armed with this fact, we can compute a very important integral.
 
 \begin{proposition}\label{prop:2.53}
     If $a > 0$, \[\int_{\R^n} \exp(-a|x|^2)\d x = \left(\frac{\pi}{a}\right)^{n/2}.\]
@@ -2364,7 +2364,7 @@ The following decomposition of Borel measures on $\R^n$ is sometimes useful.
 
 We can decompose this sum even further. Clearly, if $\mu$ is discrete, then $\mu \perp m$; and if $\mu \ll m$, then $\mu$ is continuous. Next, (assuming regularity and hence $\sigma$-finiteness) by \cref{thm:complex-radon-nikodym}, a complex Borel measure on $\R^n$ can be written uniquely as $\lambda + \rho$ for $\lambda \perp m$ and $\rho \ll m$. We can then uniquely decompose $\lambda$ into discrete and continuous parts. This gives the unique decomposition \[\mu = \mu_d + \mu_{sc} + \mu_{ac},\] where $\mu_d$ is discrete, $\mu_{ac}$ is absolutely continuous with respect to $m$, and $\mu_{sc}$ is a ``singular continuous'' measure, meaning $\mu_{sc}$ is continuous but $\mu_{sc} \perp m$. To see uniqueness, observe that $\mu_d$ is uniquely determined, and so is $\mu_{ac}$.
 
-The existence of nonzero singular continuous measures in $\R^n$ is evident enough when $n > 1$; the surface measure on the unit sphere discussed in \dhcomment{add section, and review this comment} is one example. Their existence when $n = 1$ is not quite so obvious; they correspond via \cref{thm:3.29} to nonconstant functions $F \in \NBV$ such that $F$ is continuous but $F' = 0$ a.e. One such function is the Cantor-Lebesgue function. More surprisingly, there exists strictly increasing continuous functions $F$ such that $F' = 0$ a.e.; see \citet[Exercise~40]{folland1999real}.
+The existence of nonzero singular continuous measures in $\R^n$ is evident enough when $n > 1$; the surface measure on the unit sphere discussed in \cref{sec:polar-integration} is one example. Their existence when $n = 1$ is not quite so obvious; they correspond via \cref{thm:3.29} to nonconstant functions $F \in \NBV$ such that $F$ is continuous but $F' = 0$ a.e. One such function is the Cantor-Lebesgue function. More surprisingly, there exists strictly increasing continuous functions $F$ such that $F' = 0$ a.e.; see \citet[Exercise~40]{folland1999real}.
 
 If $F \in \NBV$, it is customary to denote the integral of a function $g$ with respect to the measure $\mu_F$ by $\int g \d F$ or $\int g(x)\d F(x)$; such integrals are called Lebesgue-Stieltjes integrals. We conclude by presenting an integration-by-parts formula for Lebesgue-Stieltjes integrals; other variants of this result can be found in \citet[Exercises~34, 35]{folland1999real}.
 
