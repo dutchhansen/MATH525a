@@ -2168,10 +2168,6 @@ We now return to the study of measures.
     Let $\nu$ be a regular signed or complex Borel measure on $\R^n$, and let $\d \nu = \d \lambda + f \d m$ be its Lebesgue decomposition. Then for $m$-a.e. $x \in \R^n$, it holds that \[\lim_{r \to 0} \frac{\nu(E_r)}{m(E_r)} = f(x)\] for every family $\{E_r\}_{r > 0}$ that shrinks nicely to $x$.
 \end{theorem}
 
-\begin{exercise}
-    Let $\nu$ be a signed or complex measure and let $\d \nu = \d \lambda + f \d m$ be its Lebesgue
-\end{exercise}
-
 \begin{proof}
     It is easily verified that $\d |\nu| = \d |\lambda| + |f|\d m$\footnote{Exercise. Use the partition given by the fact that $\lambda \perp m$.}, so the regularity of $\nu$ implies the regularity of both $\lambda$ and $f \d m$ (Exercise 26). In particular, $f \in L_{\on{loc}}^1$, so in view of \cref{thm:lebesgue-differentiation}, it suffices to show that if $\lambda$ is regular and $\lambda \perp m$, then for $m$-a.e. $x$, it holds that $\lambda(E_r) / m(E_r) \to 0$ as $r \to 0$ when $E_r$ shrinks nicely to $x$. It also suffices to take $E_r = B(r, x)$ and to assume that $\lambda$ is positive, since for some $\alpha > 0$ we have \[\left|\frac{\lambda(E_r)}{m(E_r)}\right| \leq \frac{|\lambda|(E_r)}{m(E_r)} \leq \frac{|\lambda|(B(r, x))}{m(E_r)} \leq \frac{|\lambda|(B(r, x))}{\alpha m(B(r, x))}.\] Assuming $\lambda \geq 0$, then, let $A$ be a Borel set such that $\lambda(A) = m(A^c) = 0$, and let \[F_k = \left\{ x \in A : \limsup_{r \to 0} \frac{\lambda(B(r, x))}{m(B(r, x))} > \frac{1}{k} \right\}.\] We shall show that $m(F_k) = 0$ for all $k$, and this will complete the proof.
 
